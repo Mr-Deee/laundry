@@ -22,7 +22,7 @@ class AppButton extends StatelessWidget {
         width: double.infinity,
         height: ScreenUtil().setHeight(48.0),
         decoration: BoxDecoration(
-          color: getButtonColor(type),
+          color: getButtonColor(type!),
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
@@ -35,9 +35,9 @@ class AppButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            this.text,
+            this.text!,
             style: GoogleFonts.roboto(
-              color: getTextColor(type),
+              color: getTextColor(type!),
               fontSize: 16.0,
               fontWeight: FontWeight.w500,
             ),

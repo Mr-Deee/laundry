@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:laundry_app_ui/utils/constants.dart';
-import 'package:laundry_app_ui/utils/helper.dart';
-import 'package:laundry_app_ui/widgets/app_button.dart';
+
+
+import '../utils/constants.dart';
+import '../utils/helper.dart';
+import '../widgets/app_button.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -63,7 +65,7 @@ class Home extends StatelessWidget {
                     SizedBox(height: 20.0),
                     Text(
                       "Welcome to Laundree!",
-                      style: Theme.of(context).textTheme.headline6.copyWith(
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Color.fromRGBO(19, 22, 33, 1),
                       ),
