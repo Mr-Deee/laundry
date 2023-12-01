@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,27 +21,26 @@ class _DashboardState extends State<Dashboard> {
         buttonBackgroundColor: Constants.primaryColor,
         items: [
           Icon(
-            FlutterIcons.ios_home_ion,
+            Icons.ios_share_rounded,
             size: 30.0,
             color: activeIndex == 0 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.map_marker_radius_mco,
+            Icons.map,
             size: 30.0,
             color: activeIndex == 1 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.plus_ant,
+            Icons.assistant_direction,
             size: 30.0,
             color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.heart_fea,
-            size: 30.0,
+Icons.heart_broken,            size: 30.0,
             color: activeIndex == 3 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.setting_ant,
+            Icons.settings,
             size: 30.0,
             color: activeIndex == 4 ? Colors.white : Color(0xFFC8C9CB),
           ),
@@ -87,7 +87,8 @@ class _DashboardState extends State<Dashboard> {
                             Navigator.pop(context);
                           },
                           child: Icon(
-                            FlutterIcons.keyboard_backspace_mdi,
+                            Icons.ice_skating,
+                          //  FlutterIcons.keyboard_backspace_mdi,
                             color: Colors.white,
                           ),
                         ),
@@ -111,7 +112,7 @@ class _DashboardState extends State<Dashboard> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline6
-                                        .copyWith(
+                                        ?.copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -162,13 +163,13 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                         SizedBox(height: 7.0),
-                        Container(
-                          height: ScreenUtil().setHeight(100.0),
-                          child: Center(
-                            // lets make a widget for the cards
-                            child: LocationSlider(),
-                          ),
-                        ),
+                        // Container(
+                        //   height: ScreenUtil().setHeight(100.0),
+                        //   child: Center(
+                        //     // lets make a widget for the cards
+                        //     child: LocationSlider(),
+                        //   ),
+                        // ),
                         LatestOrders(),
                       ],
                     ),

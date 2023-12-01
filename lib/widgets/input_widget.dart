@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/constants.dart';
 
 class InputWidget extends StatelessWidget {
-  final String? hintText;
-  final IconData? prefixIcon;
-  final double height;
-  final String topLabel;
-  final bool obscureText;
+   String? hintText;
+   IconData? prefixIcon;
+   double? height;
+   String ?topLabel;
+   bool ?obscureText;
 
   InputWidget({
     this.hintText,
@@ -22,16 +22,16 @@ class InputWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(this.topLabel),
+        Text(this.topLabel!),
         SizedBox(height: 5.0),
         Container(
-          height: ScreenUtil().setHeight(height),
+          height: ScreenUtil().setHeight(height as num),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: TextFormField(
-            obscureText: this.obscureText,
+            obscureText: this.obscureText!,
             decoration: InputDecoration(
               // prefixIcon: this.prefixIcon == null
               //     ? this.prefixIcon

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
+import '../models/order.dart';
 import '../utils/helper.dart';
 
 class OrderCard extends StatelessWidget {
-  final Order order;
+  final Order ?order;
 
   OrderCard({this.order});
 
@@ -31,7 +32,7 @@ class OrderCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            getOrderIconWidget(order.status),
+            getOrderIconWidget(order!.status!),
             SizedBox(
               width: 25.0,
             ),
@@ -40,7 +41,7 @@ class OrderCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    getOrderStatusText(order.status),
+                    getOrderStatusText(order!.status!),
                     style: TextStyle(
                       color: Color.fromRGBO(19, 22, 33, 1),
                       fontSize: 16.0,
@@ -49,11 +50,11 @@ class OrderCard extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  textRow("Placed On", formatter.format(order.placedDate)),
+                  textRow("Placed On", formatter.format(order!.placedDate!)),
                   SizedBox(
                     height: 5.0,
                   ),
-                  textRow("Delivery On", formatter.format(order.arrivalDate))
+                  textRow("Delivery On", formatter.format(order!.arrivalDate!))
                 ],
               ),
             ),
@@ -99,7 +100,7 @@ Widget getOrderIconWidget(OrderStatus status) {
           color: Color.fromRGBO(221, 40, 81, 0.18),
         ),
         child: Icon(
-          FlutterIcons.loader_fea,
+       Icons.label,
           color: Color.fromRGBO(221, 40, 81, 1),
         ),
       );
@@ -112,7 +113,7 @@ Widget getOrderIconWidget(OrderStatus status) {
           color: Color.fromRGBO(255, 99, 2, 0.15),
         ),
         child: Icon(
-          FlutterIcons.history_mdi,
+      Icons.history,
           color: Color.fromRGBO(255, 99, 2, 1),
         ),
       );
@@ -125,7 +126,7 @@ Widget getOrderIconWidget(OrderStatus status) {
           color: Color.fromRGBO(221, 40, 81, 0.18),
         ),
         child: Icon(
-          FlutterIcons.loader_fea,
+          Icons.download_done,
           color: Color.fromRGBO(221, 40, 81, 1),
         ),
       );
