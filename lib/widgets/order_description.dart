@@ -4,8 +4,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry/utils/constants.dart';
+import 'package:laundry/widgets/item_selection.dart';
 import 'package:provider/provider.dart';
-
 
 import '../main.dart';
 import '../models/Client.dart';
@@ -74,13 +74,12 @@ class _Problem_descriptionState extends State<Problem_description> {
 
   Future<void> _getAddressFromLatLng(Position position) async {
     await placemarkFromCoordinates(
-        _currentPosition!.latitude, _currentPosition!.longitude)
+            _currentPosition!.latitude, _currentPosition!.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
       setState(() {
         _currentAddress =
-        '${place.street}, ${place.subLocality}, ${place
-            .subAdministrativeArea}, ${place.postalCode}';
+            '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
         print(place.street);
       });
     }).catchError((e) {
@@ -93,9 +92,7 @@ class _Problem_descriptionState extends State<Problem_description> {
     // Provider.of<helper>(context).getCurrentLocation();
     // final Helper =Provider.of<helper>(context) ;
 
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Constants.whiteback,
         body: SingleChildScrollView(
@@ -109,11 +106,11 @@ class _Problem_descriptionState extends State<Problem_description> {
                       ),
                       Text('Complete ${widget.title} request',
                           style: GoogleFonts.openSans(
-                            color: Colors.black,
-                            fontSize: 22,
-                          )),
+                              color: Colors.black,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold)),
                       const SizedBox(
-                        height: 50,
+                        height: 10,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,73 +123,65 @@ class _Problem_descriptionState extends State<Problem_description> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Card(
-                              elevation: 8,
-                              shadowColor: Colors.white70,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
-                                  ),
-                                  side: BorderSide(
-                                      width: 2, color: Colors.white24)),
-                              child: Container(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 12),
-                                child: TextField(
-                                  controller: requestTitlecontroller,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "",
-                                    hintStyle: GoogleFonts.openSans(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              )),
 
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              item_selection(
+                                image: 'assets/images/shirt.png',
+                                title: 'Shirt',
+                              ),
+
+
+
+                              item_selection(
+                                image: 'assets/images/tshirt.png',
+                                title: 'T-Shirt',
+                              ),
+                            ],
+                          ),
                           SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            'Enter Fault Description',
-                            style: GoogleFonts.openSans(
-                                color: Colors.black, fontSize: 18),
-                          ),
-                          const SizedBox(
                             height: 10,
                           ),
-                          Card(
-                            elevation: 8,
-                            shadowColor: Colors.white70,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                                side: BorderSide(
-                                    width: 2, color: Colors.white24)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: TextField(
-                                controller: Descriptioncontroller,
-                                maxLines: 6,
-                                cursorColor: Colors.black,
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 18),
-                                decoration: InputDecoration(
-                                  hintText: 'Be brief and precise',
-                                  hintStyle: GoogleFonts.openSans(
-                                    color: Colors.grey,
-                                    fontSize: 16,
-                                  ),
-                                  border: InputBorder.none,
-                                  fillColor: Colors.white,
-                                ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              item_selection(
+                                image: 'assets/images/suit.png',
+                                  title: 'suit',
                               ),
-                            ),
+
+
+
+                              item_selection(
+                                image: 'assets/images/trousers.png',
+                                title: 'Trouser',
+                              ),
+                            ],
                           ),
 
-                          //location
+                          SizedBox(
+                            height: 10,
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              item_selection(
+                                image: 'assets/images/skirt.png',
+                                title: 'Skirt',
+                              ),
+
+
+
+                              item_selection(
+                                image: 'assets/images/blouse.png',
+                                title: 'Blouse',
+                              ),
+                            ],
+                          ),
+
                           const SizedBox(
                             height: 30,
                           ),
@@ -201,9 +190,6 @@ class _Problem_descriptionState extends State<Problem_description> {
                                 color: Colors.black,
                                 fontSize: 18,
                               )),
-                          const SizedBox(
-                            height: 10,
-                          ),
 
                           //location
 
@@ -221,40 +207,38 @@ class _Problem_descriptionState extends State<Problem_description> {
                                 child: Center(
                                     child: Column(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Row(
-                                            children: <Widget>[
-                                              Icon(Icons.location_on),
-                                              SizedBox(
-                                                width: 8,
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Text(
-                                                      '${_currentAddress ??
-                                                          ""}',
-                                                      style: Theme
-                                                          .of(context)
-                                                          .textTheme
-                                                          .caption,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 8,
-                                              ),
-                                            ],
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(Icons.location_on),
+                                          SizedBox(
+                                            width: 8,
                                           ),
-                                        ])),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  '${_currentAddress ?? ""}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .caption,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 8,
+                                          ),
+                                        ],
+                                      ),
+                                    ])),
                               )),
 
                           const SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
                           const SizedBox(
                             height: 30,
@@ -295,28 +279,22 @@ class _Problem_descriptionState extends State<Problem_description> {
                     ]))));
   }
 
-  DropdownMenuItem<String> buildMenueItems(String item) =>
-      DropdownMenuItem(
-          value: item,
-          child: Text(
-            item,
-            style: TextStyle(fontSize: 20),
-          ));
+  DropdownMenuItem<String> buildMenueItems(String item) => DropdownMenuItem(
+      value: item,
+      child: Text(
+        item,
+        style: TextStyle(fontSize: 20),
+      ));
 
   MakingRequest() {
     request = FirebaseDatabase.instance.reference().child("Request").push();
 
     Map rideInfoMap = {
       "client_phone":
-      Provider
-          .of<Client>(context, listen: false)
-          .riderInfo
-          ?.phone,
+          Provider.of<Client>(context, listen: false).riderInfo?.phone,
       "created_at": DateTime.now().toString(),
-      'client_name': Provider
-          .of<Client>(context, listen: false)
-          .riderInfo
-          ?.firstname!,
+      'client_name':
+          Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
       'RequestName': requestTitlecontroller.text.toString(),
       'Description': Descriptioncontroller.text.toString(),
       'Location': _currentAddress?.trim().toString(),
@@ -326,7 +304,6 @@ class _Problem_descriptionState extends State<Problem_description> {
 
     request?.set(rideInfoMap);
   }
-
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
