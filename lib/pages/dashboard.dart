@@ -1,10 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:laundry/widgets/laundry_selection.dart';
 
 import '../utils/constants.dart';
 import '../widgets/latest_orders.dart';
 import '../widgets/laundryRequest.dart';
+import '../widgets/order_description.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -157,120 +159,48 @@ class _DashboardState extends State<Dashboard> {
                         SizedBox(height: 7.0),
 
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            GestureDetector(
-                              onTap: (){
-
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => laundryRequest(),
-                                  ),
-                                );
-
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Card(
-                                  elevation: 5, // Set elevation for a shadow effect
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0), // Set border radius
-                                  ),
-                                  color: Colors.white, // Set background color
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(21.0),
-                                            child: Image.asset(
-                                              "assets/images/wash.png",
-                                              scale: 10.0,
-
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Wash',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-
-                                        // Text(
-                                        //   'Some additional information goes here.',
-                                        //   style: TextStyle(fontSize: 16),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-
-
+                            //Wash
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                      const Problem_description(
+                                        image: 'assets/images/wash.png',
+                                        title: 'Wash',
+                                      )));
+                                },
+                                child: laundry_selection(
+                                  image: 'assets/images/wash.png',
+                                  title: 'Wash',
                                 ),
                               ),
                             ),
 
                             SizedBox(height: 7.0),
 //Steam or Iron
-                            GestureDetector(
-                              onTap: (){
-
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => laundryRequest(),
-                                  ),
-                                );
-
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Card(
-                                  elevation: 5, // Set elevation for a shadow effect
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0), // Set border radius
-                                  ),
-                                  color: Constants.whiteback, // Set background color
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(21.0),
-                                            child: Image.asset(
-                                              "assets/images/ironing.png",
-                                              scale: 10.0,
-
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Iron',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-
-                                        // Text(
-                                        //   'Some additional information goes here.',
-                                        //   style: TextStyle(fontSize: 16),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-
-
+                            //Wash
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                      const Problem_description(
+                                        image: 'assets/images/ironing.png',
+                                        title: 'Iron',
+                                      )));
+                                },
+                                child: laundry_selection(
+                                  image: 'assets/images/ironing.png',
+                                  title: 'Iron',
                                 ),
                               ),
-                            )
+                            ),
+
                           ],
                         )   ,
 
@@ -280,122 +210,48 @@ class _DashboardState extends State<Dashboard> {
                         SizedBox(height: 2.0),
 
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            GestureDetector(
-                              onTap: (){
 
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => laundryRequest(),
-                                  ),
-                                );
+                            //Dry Clean
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                      const Problem_description(
+                                        image: 'assets/images/dry-cleaning.png',
+                                        title: 'Dry Clean',
+                                      )));
+                                },
+                                child: laundry_selection(
+                                  image: 'assets/images/dry-cleaning.png',
+                                  title: 'Dry Clean',
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 7.0),
 
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Card(
-                                  elevation: 5, // Set elevation for a shadow effect
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0), // Set border radius
-                                  ),
-                                  color: Colors.white, // Set background color
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(21.0),
-                                            child: Image.asset(
-                                              "assets/images/dry-cleaning.png",
-                                              scale: 10.0,
-
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Dry Clean',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-
-                                        // Text(
-                                        //   'Some additional information goes here.',
-                                        //   style: TextStyle(fontSize: 16),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-
-
+                            //others
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                      const Problem_description(
+                                        image: 'assets/images/running-shoes.png',
+                                        title: 'Others',
+                                      )));
+                                },
+                                child: laundry_selection(
+                                  image: 'assets/images/running-shoes.png',
+                                  title: 'Others',
                                 ),
                               ),
                             ),
 
-                            SizedBox(height: 7.0),
-
-                            //others
-
-                            GestureDetector(
-                              onTap: (){
-
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => laundryRequest(),
-                                  ),
-                                );
-
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Card(
-                                  elevation: 5, // Set elevation for a shadow effect
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0), // Set border radius
-                                  ),
-                                  color: Constants.whiteback, // Set background color
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(21.0),
-                                            child: Image.asset(
-                                              "assets/images/running-shoes.png",
-                                              scale: 10.0,
-
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Other',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-
-                                        // Text(
-                                        //   'Some additional information goes here.',
-                                        //   style: TextStyle(fontSize: 16),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-
-
-                                ),
-                              ),
-                            )
                           ],
                         )   ,
 
