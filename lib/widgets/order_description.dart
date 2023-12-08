@@ -173,7 +173,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   setState(() {
                                     selectedItemTitle = name;
                                     selectedItemImage = image;
-                                    selectedItemCount = count;
+                                    selectedItemCount = count.toString();
                                   })
                                 },
                               ),

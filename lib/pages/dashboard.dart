@@ -5,7 +5,7 @@ import 'package:laundry/widgets/laundry_selection.dart';
 
 import '../utils/constants.dart';
 import '../widgets/latest_orders.dart';
-import '../widgets/laundryRequest.dart';
+// import '../widgets/laundryRequest.dart';
 import '../widgets/order_description.dart';
 
 class Dashboard extends StatefulWidget {
@@ -98,8 +98,8 @@ class _DashboardState extends State<Dashboard> {
                                         .textTheme
                                         .headline6
                                         ?.copyWith(
-                                      color: Colors.white,
-                                    ),
+                                          color: Colors.white,
+                                        ),
                                   ),
                                   TextSpan(
                                     text: "name!",
@@ -107,9 +107,9 @@ class _DashboardState extends State<Dashboard> {
                                         .textTheme
                                         .headline6
                                         ?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   )
                                 ],
                               ),
@@ -168,10 +168,10 @@ class _DashboardState extends State<Dashboard> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                      const Problem_description(
-                                        image: 'assets/images/wash.png',
-                                        title: 'Wash',
-                                      )));
+                                          const Problem_description(
+                                            image: 'assets/images/wash.png',
+                                            title: 'Wash',
+                                          )));
                                 },
                                 child: laundry_selection(
                                   image: 'assets/images/wash.png',
@@ -189,10 +189,10 @@ class _DashboardState extends State<Dashboard> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                      const Problem_description(
-                                        image: 'assets/images/ironing.png',
-                                        title: 'Iron',
-                                      )));
+                                          const Problem_description(
+                                            image: 'assets/images/ironing.png',
+                                            title: 'Iron',
+                                          )));
                                 },
                                 child: laundry_selection(
                                   image: 'assets/images/ironing.png',
@@ -200,19 +200,14 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                               ),
                             ),
-
                           ],
-                        )   ,
-
-
-
+                        ),
 
                         SizedBox(height: 2.0),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-
                             //Dry Clean
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -220,10 +215,11 @@ class _DashboardState extends State<Dashboard> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                      const Problem_description(
-                                        image: 'assets/images/dry-cleaning.png',
-                                        title: 'Dry Clean',
-                                      )));
+                                          const Problem_description(
+                                            image:
+                                                'assets/images/dry-cleaning.png',
+                                            title: 'Dry Clean',
+                                          )));
                                 },
                                 child: laundry_selection(
                                   image: 'assets/images/dry-cleaning.png',
@@ -240,10 +236,11 @@ class _DashboardState extends State<Dashboard> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                      const Problem_description(
-                                        image: 'assets/images/running-shoes.png',
-                                        title: 'Others',
-                                      )));
+                                          const Problem_description(
+                                            image:
+                                                'assets/images/running-shoes.png',
+                                            title: 'Others',
+                                          )));
                                 },
                                 child: laundry_selection(
                                   image: 'assets/images/running-shoes.png',
@@ -251,10 +248,8 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                               ),
                             ),
-
                           ],
-                        )   ,
-
+                        ),
 
                         // Container(
                         //   height: ScreenUtil().setHeight(100.0),
