@@ -87,6 +87,10 @@ class _Problem_descriptionState extends State<Problem_description> {
     });
   }
 
+  String? selectedItemImage;
+  String? selectedItemTitle;
+  String? selectedItemCount;
+
   @override
   Widget build(BuildContext context) {
     // Provider.of<helper>(context).getCurrentLocation();
@@ -131,9 +135,6 @@ class _Problem_descriptionState extends State<Problem_description> {
                                 image: 'assets/images/shirt.png',
                                 title: 'Shirt',
                               ),
-
-
-
                               item_selection(
                                 image: 'assets/images/tshirt.png',
                                 title: 'T-Shirt',
@@ -149,11 +150,8 @@ class _Problem_descriptionState extends State<Problem_description> {
                             children: [
                               item_selection(
                                 image: 'assets/images/suit.png',
-                                  title: 'suit',
+                                title: 'suit',
                               ),
-
-
-
                               item_selection(
                                 image: 'assets/images/trousers.png',
                                 title: 'Trouser',
@@ -171,10 +169,14 @@ class _Problem_descriptionState extends State<Problem_description> {
                               item_selection(
                                 image: 'assets/images/skirt.png',
                                 title: 'Skirt',
+                                onItemSelected: (name, image, count) => {
+                                  setState(() {
+                                    selectedItemTitle = name;
+                                    selectedItemImage = image;
+                                    selectedItemCount = count;
+                                  })
+                                },
                               ),
-
-
-
                               item_selection(
                                 image: 'assets/images/blouse.png',
                                 title: 'Blouse',
@@ -255,7 +257,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    //MakingRequest();
+                                    MakingRequest();
                                     // Navigator.push(
                                     //     context,
                                     //     MaterialPageRoute(
