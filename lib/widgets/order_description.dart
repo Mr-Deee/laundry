@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -95,6 +96,12 @@ class _Problem_descriptionState extends State<Problem_description> {
   String? selectedItemTitle4;
   String? selectedItemTitle5;
   String? selectedItemCount;
+  String? selectedItemCount1;
+  String? selectedItemCount2;
+  String? selectedItemCount3;
+  String? selectedItemCount4;
+  String? selectedItemCount5;
+  String? selectedItemCount6;
 
   @override
   Widget build(BuildContext context) {
@@ -157,11 +164,11 @@ class _Problem_descriptionState extends State<Problem_description> {
                                         setState(() {
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
-                                          selectedItemCount = count.toString();
+                                          selectedItemCount1 = count.toString();
                                           itemCountMap[selectedItemTitle
                                                   .toString()] =
                                               int.parse(
-                                                  selectedItemCount.toString());
+                                                  selectedItemCount1.toString());
                                         }),
                                       }),
                             ],
@@ -180,11 +187,11 @@ class _Problem_descriptionState extends State<Problem_description> {
                                         setState(() {
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
-                                          selectedItemCount = count.toString();
+                                          selectedItemCount2 = count.toString();
                                           itemCountMap[selectedItemTitle
                                                   .toString()] =
                                               int.parse(
-                                                  selectedItemCount.toString());
+                                                  selectedItemCount2.toString());
                                         }),
                                       }),
                               item_selection(
@@ -194,11 +201,11 @@ class _Problem_descriptionState extends State<Problem_description> {
                                         setState(() {
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
-                                          selectedItemCount = count.toString();
+                                          selectedItemCount3 = count.toString();
                                           itemCountMap[selectedItemTitle
                                                   .toString()] =
                                               int.parse(
-                                                  selectedItemCount.toString());
+                                                  selectedItemCount3.toString());
                                         }),
                                       }),
                             ],
@@ -218,9 +225,9 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   setState(() {
                                     selectedItemTitle = name;
                                     selectedItemImage = image;
-                                    selectedItemCount = count.toString();
+                                    selectedItemCount4 = count.toString();
                                     itemCountMap[selectedItemTitle.toString()] =
-                                        int.parse(selectedItemCount.toString());
+                                        int.parse(selectedItemCount4.toString());
                                   })
                                 },
                               ),
@@ -231,13 +238,13 @@ class _Problem_descriptionState extends State<Problem_description> {
                                         setState(() {
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
-                                          selectedItemCount = count.toString();
+                                          selectedItemCount5 = count.toString();
 
                                           // Update itemCountMap when an item is selected
                                           itemCountMap[selectedItemTitle
                                                   .toString()] =
                                               int.parse(
-                                                  selectedItemCount.toString());
+                                                  selectedItemCount5.toString());
                                         }),
                                       })
                             ],
@@ -337,21 +344,10 @@ class _Problem_descriptionState extends State<Problem_description> {
         item,
         style: TextStyle(fontSize: 20),
       ));
-
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   MakingRequest() {
-    request = FirebaseDatabase.instance.ref().child("Request").push();
+    request = FirebaseDatabase.instance.ref().child("Request").child(_firebaseAuth.currentUser!.uid).push();
 
-    // // Create a list to store the selected items
-    // List<Map<String, dynamic>> selectedItemsList = [];
-
-    // // Create a list to store the selected items
-    // // Add each selected item with its count to the list
-    // for (var entry in itemCountMap.entries) {
-    //   selectedItemsList.add({
-    //     'title': entry.key,
-    //     'count': entry.value,
-    //   });
-    // }
 
     Map rideInfoMap = {
       // "client_phone":
@@ -359,23 +355,24 @@ class _Problem_descriptionState extends State<Problem_description> {
       "created_at": DateTime.now().toString(),
       // 'client_name':
       //     Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-      // 'SelectedItem': [
-      //   selectedItemTitle,
-      //   selectedItemTitle2,
-      //   selectedItemTitle3,
-      //   selectedItemTitle4,
-      //   selectedItemTitle5
-      // ],
-      // 'selectedItemImage': selectedItemImage,
-      //New addition
-      // 'SelectedItems2': selectedItemsList,
-      // 'selectedItemCount': selectedItemCount,
-      // 'Location': _currentAddress?.trim().toString(),
-      // 'Service Type': widget.title.toString(),
-      // 'finalClient_address': _currentAddress?.trim().toString(),
+      'selectedItemCount': selectedItemCount,
+      'Location': _currentAddress?.trim().toString(),
+      'Service Type': widget.title.toString(),
+      'finalClient_address': _currentAddress?.trim().toString(),
     };
 
     request?.set(rideInfoMap);
+    request?.child("SelectedItem").update({
+      "Shirt":selectedItemCount,
+      "T-shirt":selectedItemCount1,
+      "Suit":selectedItemCount2,
+      "Trouser":selectedItemCount3,
+      "Skirt":selectedItemCount4,
+      "Blouse":selectedItemCount5,
+
+
+    });
+
   }
 
   Future<bool> _handleLocationPermission() async {

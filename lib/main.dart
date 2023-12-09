@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),
 
         initialRoute: FirebaseAuth.instance.currentUser == null
-            ? '/dashboard'
+            ? '/login'
             : '/dashboard',
         routes: {
           // "/splash":(context) => SplashScreen(),

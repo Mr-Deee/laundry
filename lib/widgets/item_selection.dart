@@ -24,7 +24,7 @@ class _item_selectionState extends State<item_selection> {
   String? selectedLaundryItem;
 
   _item_selectionState(this.image, this.title, this.onItemSelected);
-  int count = 0;
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return FadeInUp(
