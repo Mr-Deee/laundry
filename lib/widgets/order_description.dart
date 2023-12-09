@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -346,6 +347,38 @@ class _Problem_descriptionState extends State<Problem_description> {
       ));
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   MakingRequest() {
+
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.transparent,
+              child: Container(
+                  margin: EdgeInsets.all(15.0),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0)
+                  ),
+                  child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            SizedBox(width: 6.0,),
+                            CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.black),),
+                            SizedBox(width: 26.0,),
+                            Text("Adding Request, please wait...")
+
+                          ],
+                        ),
+                      ))));
+        });
     request = FirebaseDatabase.instance.ref().child("Request").child(_firebaseAuth.currentUser!.uid).push();
 
 
@@ -371,8 +404,30 @@ class _Problem_descriptionState extends State<Problem_description> {
       "Blouse":selectedItemCount5,
 
 
+    }).then((_) {
+      Navigator.pop(context); // close the progress dialog
+      Fluttertoast.showToast(
+        msg: "Request submitted successfully. Thank you!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+    }).catchError((error) {
+      Navigator.pop(context); // close the progress dialog
+      Fluttertoast.showToast(
+        msg: "Error submitting request. Please try again.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      print("Error submitting request: $error");
     });
-
   }
 
   Future<bool> _handleLocationPermission() async {

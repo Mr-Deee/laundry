@@ -2,8 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:laundry/models/Client.dart';
 import 'package:laundry/widgets/laundry_selection.dart';
+import 'package:provider/provider.dart';
 
+import '../models/assitantmethods.dart';
 import '../utils/constants.dart';
 import '../widgets/latest_orders.dart';
 // import '../widgets/laundryRequest.dart';
@@ -15,10 +18,19 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    AssistantMethod.getCurrentOnlineUserInfo(context);}
+
   // Track active index
   int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final name = Provider.of<Client>(context).riderInfo?.firstname??"Loading";
     return Scaffold(
 //       bottomNavigationBar: CurvedNavigationBar(
 //         backgroundColor: Constants.scaffoldBackgroundColor,
@@ -107,7 +119,7 @@ class _DashboardState extends State<Dashboard> {
                                   ),
 
                                   TextSpan(
-                                    text: "name!",
+                                    text: name!,
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline6
