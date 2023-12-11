@@ -23,8 +23,8 @@ class Problem_description extends StatefulWidget {
 }
 
 class _Problem_descriptionState extends State<Problem_description> {
-  TextEditingController requestTitlecontroller = TextEditingController();
-  TextEditingController Descriptioncontroller = TextEditingController();
+  // TextEditingController requestTitlecontroller = TextEditingController();
+  // TextEditingController Descriptioncontroller = TextEditingController();
 
   // List<NearbyArtisans>? availableArtisans;
   String? _currentAddress;
@@ -297,8 +297,10 @@ class _Problem_descriptionState extends State<Problem_description> {
       "created_at": DateTime.now().toString(),
       'client_name':
           Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-      'RequestName': requestTitlecontroller.text.toString(),
-      'Description': Descriptioncontroller.text.toString(),
+    'SelectedItem':  selectedItemTitle,
+    'selectedItemImage' : selectedItemImage,
+    'selectedItemCount' : selectedItemCount,
+      // 'Description': Descriptioncontroller.text.toString(),
       'Location': _currentAddress?.trim().toString(),
       'Service Type': widget.title.toString(),
       'finalClient_address': _currentAddress?.trim().toString(),
