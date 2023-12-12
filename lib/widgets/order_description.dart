@@ -354,8 +354,9 @@ class _Problem_descriptionState extends State<Problem_description> {
       "created_at": DateTime.now().toString(),
       'client_name':
           Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-      'SelectedItem':selectedItemsList,
+      'SelectedItem':[selectedItemTitle, selectedItemTitle2, selectedItemTitle3,selectedItemTitle4,selectedItemTitle5],
       'selectedItemImage': selectedItemImage,
+
       'selectedItemCount': selectedItemCount,
       // 'Description': Descriptioncontroller.text.toString(),
       'Location': _currentAddress?.trim().toString(),
