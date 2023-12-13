@@ -346,13 +346,19 @@ class _Problem_descriptionState extends State<Problem_description> {
 
     // Create a list to store the selected items
     // Add each selected item with its count to the list
-    for (var entry in itemCountMap.entries) {
-      selectedItemsList.add({
-        'title': entry.key,
-        // 'count': entry.value,
-      });
-    }
+    // for (var entry in itemCountMap.entries) {
+    //   selectedItemsList.add({
+    //     'title': key,
+    //      'count': entry.value,
+    //   });
+    // }
 
+    itemCountMap.forEach((key, value) {
+      selectedItemsList.add({
+        'title': key,
+        'count': value,
+      });
+    });
     Map rideInfoMap = {
       // "client_phone":
       //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
