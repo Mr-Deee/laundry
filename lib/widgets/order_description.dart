@@ -349,7 +349,7 @@ class _Problem_descriptionState extends State<Problem_description> {
     for (var entry in itemCountMap.entries) {
       selectedItemsList.add({
         'title': entry.key,
-        'count': entry.value,
+        // 'count': entry.value,
       });
     }
 
@@ -368,7 +368,7 @@ class _Problem_descriptionState extends State<Problem_description> {
       // ],
       'selectedItemImage': selectedItemImage,
       //New addition
-      'SelectedItems2': selectedItemsList,
+      // 'SelectedItems2': selectedItemsList,
       'selectedItemCount': selectedItemCount,
       'Location': _currentAddress?.trim().toString(),
       'Service Type': widget.title.toString(),
