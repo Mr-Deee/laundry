@@ -368,7 +368,7 @@ class _Problem_descriptionState extends State<Problem_description> {
       // ],
       // 'selectedItemImage': selectedItemImage,
       //New addition
-      'SelectedItems2': selectedItemsList,
+      // 'SelectedItems2': selectedItemsList,
       // 'selectedItemCount': selectedItemCount,
       // 'Location': _currentAddress?.trim().toString(),
       // 'Service Type': widget.title.toString(),
