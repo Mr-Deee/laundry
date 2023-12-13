@@ -341,17 +341,17 @@ class _Problem_descriptionState extends State<Problem_description> {
   MakingRequest() {
     request = FirebaseDatabase.instance.ref().child("Request").push();
 
-    // Create a list to store the selected items
-    List<Map<String, dynamic>> selectedItemsList = [];
+    // // Create a list to store the selected items
+    // List<Map<String, dynamic>> selectedItemsList = [];
 
-    // Create a list to store the selected items
-    // Add each selected item with its count to the list
-    for (var entry in itemCountMap.entries) {
-      selectedItemsList.add({
-        'title': entry.key,
-        'count': entry.value,
-      });
-    }
+    // // Create a list to store the selected items
+    // // Add each selected item with its count to the list
+    // for (var entry in itemCountMap.entries) {
+    //   selectedItemsList.add({
+    //     'title': entry.key,
+    //     'count': entry.value,
+    //   });
+    // }
 
     Map rideInfoMap = {
       // "client_phone":
