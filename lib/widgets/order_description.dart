@@ -352,10 +352,10 @@ class _Problem_descriptionState extends State<Problem_description> {
       });
     }
     // Update the database with the selected item and count
-    databaseReference.child("Request").push().set({
-      "itemTitle": selectedItemsList,
-      "itemImage": selectedItemImage,
-      "itemCount": selectedItemCount,
+    databaseReference.child("Requests").push().set({
+      "itemTitle": "selectedItemsList",
+      "itemImage": "selectedItemImage",
+      "itemCount": "selectedItemCount",
       // Add other relevant data fields as needed
     });
     // // Create a list to store the selected items
@@ -370,29 +370,29 @@ class _Problem_descriptionState extends State<Problem_description> {
     //   });
     // }
 
-    Map rideInfoMap = {
-      // "client_phone":
-      //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
-      "created_at": DateTime.now().toString(),
-      // 'client_name':
-      //     Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-      // 'SelectedItem': [
-      //   selectedItemTitle,
-      //   selectedItemTitle2,
-      //   selectedItemTitle3,
-      //   selectedItemTitle4,
-      //   selectedItemTitle5
-      // ],
-      'selectedItemImage': selectedItemImage,
-      //New addition
-      // 'SelectedItems2': selectedItemsList,
-      // 'selectedItemCount': selectedItemCount,
-      // 'Location': _currentAddress?.trim().toString(),
-      'Service Type': widget.title.toString(),
-      // 'finalClient_address': _currentAddress?.trim().toString(),
-    };
+    // Map rideInfoMap = {
+    //   // "client_phone":
+    //   //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
+    //   "created_at": DateTime.now().toString(),
+    //   // 'client_name':
+    //   //     Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
+    //   // 'SelectedItem': [
+    //   //   selectedItemTitle,
+    //   //   selectedItemTitle2,
+    //   //   selectedItemTitle3,
+    //   //   selectedItemTitle4,
+    //   //   selectedItemTitle5
+    //   // ],
+    //   'selectedItemImage': selectedItemImage,
+    //   //New addition
+    //   // 'SelectedItems2': selectedItemsList,
+    //   // 'selectedItemCount': selectedItemCount,
+    //   // 'Location': _currentAddress?.trim().toString(),
+    //   'Service Type': widget.title.toString(),
+    //   // 'finalClient_address': _currentAddress?.trim().toString(),
+    // };
 
-    request.set(rideInfoMap);
+    // request.set(rideInfoMap);
   }
 
   Future<bool> _handleLocationPermission() async {
