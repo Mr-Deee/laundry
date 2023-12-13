@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry/utils/constants.dart';
 import 'package:laundry/widgets/item_selection.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../main.dart';
 import '../models/Client.dart';
@@ -382,6 +383,15 @@ class _Problem_descriptionState extends State<Problem_description> {
     };
 
     request?.set(rideInfoMap);
+
+    request?.set(rideInfoMap).then((value) {
+      // Successfully wrote to the database
+      print("Data written successfully");
+    }).catchError((error) {
+      displayToast("$error ", context);
+
+      print("Error writing to the database: $error");
+    });
   }
 
   Future<bool> _handleLocationPermission() async {
@@ -411,5 +421,11 @@ class _Problem_descriptionState extends State<Problem_description> {
       return false;
     }
     return true;
+  }
+
+  displayToast(String message, BuildContext context) {
+    Fluttertoast.showToast(msg: message);
+
+// user created
   }
 }
