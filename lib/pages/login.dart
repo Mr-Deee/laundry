@@ -187,17 +187,7 @@ class Login extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Color(0xFFF169F00)),
                                     onPressed: () {
-                                      // sendVerificationCode();
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => SMSCodeInputScreen("verificationId"),
-                                      //   ),
-                                      // );
-                                      // _sendVerificationCode();
-
                                       loginAndAuthenticateUser(context);
-                                      // Implement Firebase email/password sign-in logic here
                                     },
                                     child: Text(
                                       "Continue",
@@ -231,14 +221,16 @@ class Login extends StatelessWidget {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void loginAndAuthenticateUser(BuildContext context) async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return ProgressDialog(
-            message: "Logging you ,Please wait.",
-          );
-        });
+    // showDialog(
+    //     context: context,
+    //     barrierDismissible: false,
+    //     builder: (BuildContext context) {
+    //       return ProgressDialog(
+    //         message: "Logging you ,Please wait.",
+    //       );
+    //     }
+
+    //     );
 
     Future signInWithEmailAndPassword(String email, String password) async {
       try {

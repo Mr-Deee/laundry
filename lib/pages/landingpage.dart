@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:laundry/pages/login.dart';
 import 'package:laundry/pages/signup.dart';
 
-
 import '../utils/constants.dart';
 import '../utils/helper.dart';
 import '../widgets/app_button.dart';
@@ -62,15 +61,15 @@ class Landingpage extends StatelessWidget {
                   ),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 20.0),
                     Text(
                       "Welcome to The Laundry",
                       style: Theme.of(context).textTheme.headline6?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(19, 22, 33, 1),
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(19, 22, 33, 1),
+                          ),
                     ),
                     SizedBox(
                       height: 10.0,
@@ -94,14 +93,12 @@ class Landingpage extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black),
                           onPressed: () {
-
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Login(),
                               ),
                             );
-
                           },
                           child: Text(
                             "Login",
@@ -127,7 +124,6 @@ class Landingpage extends StatelessWidget {
                                 builder: (context) => signup(),
                               ),
                             );
-
                           },
                           child: Text(
                             "Create Account",
@@ -139,7 +135,6 @@ class Landingpage extends StatelessWidget {
                     SizedBox(
                       height: 15.0,
                     ),
-
                   ],
                 ),
               ),

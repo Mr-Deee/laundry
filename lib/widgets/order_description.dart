@@ -244,7 +244,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                           ),
 
                           const SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
                           Text('Location',
                               style: GoogleFonts.openSans(
@@ -317,15 +317,6 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   ),
                                   onPressed: () {
                                     MakingRequest();
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => Search(
-                                    //             title: widget.title,
-                                    //             image: widget.image)));
-                                    // availableArtisans = GeoFireAssistant
-                                    //     .nearByAvailableArtisansList;
-                                    // searchNearestArtisans();
                                   },
                                   child: Text(
                                     "Complete request",
@@ -378,9 +369,7 @@ class _Problem_descriptionState extends State<Problem_description> {
       'selectedItemImage': selectedItemImage,
       //New addition
       'SelectedItems2': selectedItemsList,
-
       'selectedItemCount': selectedItemCount,
-      // 'Description': Descriptioncontroller.text.toString(),
       'Location': _currentAddress?.trim().toString(),
       'Service Type': widget.title.toString(),
       'finalClient_address': _currentAddress?.trim().toString(),

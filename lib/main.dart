@@ -11,6 +11,7 @@ import 'package:laundry/pages/signup.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
+
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -18,17 +19,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MultiProvider(providers: [
-
     ChangeNotifierProvider<Client>(
       create: (context) => Client(),
     ),
-
-
-
-
-
-  ],child: MyApp()));
+  ], child: MyApp()));
 }
+
 DatabaseReference clients = FirebaseDatabase.instance.ref().child("Clients");
 
 class MyApp extends StatelessWidget {
@@ -38,18 +34,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Laundry',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-        useMaterial3: true,
-      ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-
+        title: 'Laundry',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          useMaterial3: true,
+        ),
+        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
 
         initialRoute: FirebaseAuth.instance.currentUser == null
-            ? '/landing'
+            // ? '/landing'
+            ? '/dashboard'
             : '/dashboard',
         routes: {
           // "/splash":(context) => SplashScreen(),
@@ -57,11 +52,6 @@ class MyApp extends StatelessWidget {
           "/SignUP": (context) => signup(),
           "/login": (context) => Login(),
           "/landing": (context) => Landingpage(),
-
-
-        }
-    );
+        });
   }
 }
-
-
