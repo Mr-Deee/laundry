@@ -25,6 +25,7 @@ class Problem_description extends StatefulWidget {
 class _Problem_descriptionState extends State<Problem_description> {
   // TextEditingController requestTitlecontroller = TextEditingController();
   // TextEditingController Descriptioncontroller = TextEditingController();
+  Map<String, int> itemCountMap = {};
 
   // List<NearbyArtisans>? availableArtisans;
   String? _currentAddress;
@@ -88,11 +89,11 @@ class _Problem_descriptionState extends State<Problem_description> {
   }
 
   String? selectedItemImage;
- String? selectedItemTitle;
- String? selectedItemTitle2;
- String? selectedItemTitle3;
- String? selectedItemTitle4;
- String? selectedItemTitle5;
+  String? selectedItemTitle;
+  String? selectedItemTitle2;
+  String? selectedItemTitle3;
+  String? selectedItemTitle4;
+  String? selectedItemTitle5;
   String? selectedItemCount;
 
   @override
@@ -136,29 +137,33 @@ class _Problem_descriptionState extends State<Problem_description> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               item_selection(
-                                image: 'assets/images/shirt.png',
-                                title: 'Shirt',
-                                  onItemSelected: (name, image, count) =>
-                                  {
-                                    setState(() {
-                                      selectedItemTitle = name;
-                                      selectedItemImage = image;
-                                      selectedItemCount = count.toString();
-                                    }),
-                                  }
-                              ),
+                                  image: 'assets/images/shirt.png',
+                                  title: 'Shirt',
+                                  onItemSelected: (name, image, count) => {
+                                        setState(() {
+                                          selectedItemTitle = name;
+                                          selectedItemImage = image;
+                                          selectedItemCount = count.toString();
+                                          itemCountMap[selectedItemTitle
+                                                  .toString()] =
+                                              int.parse(
+                                                  selectedItemCount.toString());
+                                        }),
+                                      }),
                               item_selection(
-                                image: 'assets/images/tshirt.png',
-                                title: 'T-Shirt',
-                                  onItemSelected: (name, image, count) =>
-                                  {
-                                    setState(() {
-                                      selectedItemTitle2 = name;
-                                      selectedItemImage = image;
-                                      selectedItemCount = count.toString();
-                                    }),
-                                  }
-                              ),
+                                  image: 'assets/images/tshirt.png',
+                                  title: 'T-Shirt',
+                                  onItemSelected: (name, image, count) => {
+                                        setState(() {
+                                          selectedItemTitle2 = name;
+                                          selectedItemImage = image;
+                                          selectedItemCount = count.toString();
+                                          itemCountMap[selectedItemTitle
+                                                  .toString()] =
+                                              int.parse(
+                                                  selectedItemCount.toString());
+                                        }),
+                                      }),
                             ],
                           ),
                           SizedBox(
@@ -169,30 +174,33 @@ class _Problem_descriptionState extends State<Problem_description> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               item_selection(
-                                image: 'assets/images/suit.png',
-                                title: 'suit',
-                                  onItemSelected: (name, image, count) =>
-                                  {
-                                    setState(() {
-                                      selectedItemTitle3 = name;
-                                      selectedItemImage = image;
-                                      selectedItemCount = count.toString();
-                                    }),
-                                  }
-                              ),
+                                  image: 'assets/images/suit.png',
+                                  title: 'suit',
+                                  onItemSelected: (name, image, count) => {
+                                        setState(() {
+                                          selectedItemTitle3 = name;
+                                          selectedItemImage = image;
+                                          selectedItemCount = count.toString();
+                                          itemCountMap[selectedItemTitle
+                                                  .toString()] =
+                                              int.parse(
+                                                  selectedItemCount.toString());
+                                        }),
+                                      }),
                               item_selection(
-                                image: 'assets/images/trousers.png',
-                                title: 'Trouser',
-
-                                  onItemSelected: (name, image, count) =>
-                                  {
-                                    setState(() {
-                                      selectedItemTitle4 = name;
-                                      selectedItemImage = image;
-                                      selectedItemCount = count.toString();
-                                    }),
-                                  }
-                              ),
+                                  image: 'assets/images/trousers.png',
+                                  title: 'Trouser',
+                                  onItemSelected: (name, image, count) => {
+                                        setState(() {
+                                          selectedItemTitle4 = name;
+                                          selectedItemImage = image;
+                                          selectedItemCount = count.toString();
+                                          itemCountMap[selectedItemTitle
+                                                  .toString()] =
+                                              int.parse(
+                                                  selectedItemCount.toString());
+                                        }),
+                                      }),
                             ],
                           ),
 
@@ -211,22 +219,27 @@ class _Problem_descriptionState extends State<Problem_description> {
                                     selectedItemTitle = name;
                                     selectedItemImage = image;
                                     selectedItemCount = count.toString();
+                                    itemCountMap[selectedItemTitle.toString()] =
+                                        int.parse(selectedItemCount.toString());
                                   })
                                 },
                               ),
                               item_selection(
-                                image: 'assets/images/blouse.png',
-                                title: 'Blouse',
+                                  image: 'assets/images/blouse.png',
+                                  title: 'Blouse',
+                                  onItemSelected: (name, image, count) => {
+                                        setState(() {
+                                          selectedItemTitle5 = name;
+                                          selectedItemImage = image;
+                                          selectedItemCount = count.toString();
 
-                                  onItemSelected: (name, image, count) =>
-                                  {
-                                    setState(() {
-                                      selectedItemTitle5 = name;
-                                      selectedItemImage = image;
-                                      selectedItemCount = count.toString();
-                                    }),
-                                  })
-
+                                          // Update itemCountMap when an item is selected
+                                          itemCountMap[selectedItemTitle
+                                                  .toString()] =
+                                              int.parse(
+                                                  selectedItemCount.toString());
+                                        }),
+                                      })
                             ],
                           ),
 
@@ -339,7 +352,8 @@ class _Problem_descriptionState extends State<Problem_description> {
 
     // Create a list to store the selected items
     List<Map<String, dynamic>> selectedItemsList = [];
-    Map<String, int> itemCountMap = {};
+
+    // Create a list to store the selected items
     // Add each selected item with its count to the list
     for (var entry in itemCountMap.entries) {
       selectedItemsList.add({
@@ -354,8 +368,16 @@ class _Problem_descriptionState extends State<Problem_description> {
       "created_at": DateTime.now().toString(),
       'client_name':
           Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-      'SelectedItem':[selectedItemTitle, selectedItemTitle2, selectedItemTitle3,selectedItemTitle4,selectedItemTitle5],
+      'SelectedItem': [
+        selectedItemTitle,
+        selectedItemTitle2,
+        selectedItemTitle3,
+        selectedItemTitle4,
+        selectedItemTitle5
+      ],
       'selectedItemImage': selectedItemImage,
+      //New addition
+      'SelectedItems2': selectedItemsList,
 
       'selectedItemCount': selectedItemCount,
       // 'Description': Descriptioncontroller.text.toString(),
