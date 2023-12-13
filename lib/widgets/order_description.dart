@@ -155,7 +155,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'T-Shirt',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
-                                          selectedItemTitle2 = name;
+                                          selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount = count.toString();
                                           itemCountMap[selectedItemTitle
@@ -178,7 +178,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'suit',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
-                                          selectedItemTitle3 = name;
+                                          selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount = count.toString();
                                           itemCountMap[selectedItemTitle
@@ -192,7 +192,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'Trouser',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
-                                          selectedItemTitle4 = name;
+                                          selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount = count.toString();
                                           itemCountMap[selectedItemTitle
@@ -229,7 +229,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'Blouse',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
-                                          selectedItemTitle5 = name;
+                                          selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount = count.toString();
 
@@ -354,18 +354,18 @@ class _Problem_descriptionState extends State<Problem_description> {
     }
 
     Map rideInfoMap = {
-      "client_phone":
-          Provider.of<Client>(context, listen: false).riderInfo?.phone,
+      // "client_phone":
+      //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
       "created_at": DateTime.now().toString(),
-      'client_name':
-          Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-      'SelectedItem': [
-        selectedItemTitle,
-        selectedItemTitle2,
-        selectedItemTitle3,
-        selectedItemTitle4,
-        selectedItemTitle5
-      ],
+      // 'client_name':
+      //     Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
+      // 'SelectedItem': [
+      //   selectedItemTitle,
+      //   selectedItemTitle2,
+      //   selectedItemTitle3,
+      //   selectedItemTitle4,
+      //   selectedItemTitle5
+      // ],
       'selectedItemImage': selectedItemImage,
       //New addition
       'SelectedItems2': selectedItemsList,
