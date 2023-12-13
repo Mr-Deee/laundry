@@ -339,8 +339,25 @@ class _Problem_descriptionState extends State<Problem_description> {
       ));
 
   MakingRequest() {
-    // request = FirebaseDatabase.instance.ref().child("Request").push();
+    //  request = FirebaseDatabase.instance.ref().child("Request").push().set(value);
+    DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
+    List<Map<String, dynamic>> selectedItemsList = [];
 
+    // // // Create a list to store the selected items
+    // // // Add each selected item with its count to the list
+    for (var entry in itemCountMap.entries) {
+      selectedItemsList.add({
+        'title': entry.key,
+        'count': entry.value,
+      });
+    }
+    // Update the database with the selected item and count
+    databaseReference.child("Request").push().set({
+      "itemTitle": selectedItemsList,
+      "itemImage": selectedItemImage,
+      "itemCount": selectedItemCount,
+      // Add other relevant data fields as needed
+    });
     // // Create a list to store the selected items
     // List<Map<String, dynamic>> selectedItemsList = [];
 
