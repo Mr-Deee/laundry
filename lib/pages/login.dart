@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 import '../main.dart';
 import '../models/assitantmethods.dart';
 import '../utils/constants.dart';
@@ -12,7 +11,6 @@ import '../widgets/input_widget.dart';
 import '../widgets/progressDialog.dart';
 
 class Login extends StatelessWidget {
-
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   @override
@@ -54,7 +52,7 @@ class Login extends StatelessWidget {
                                 Navigator.of(context).pop();
                               },
                               child: Icon(
-                          Icons.keyboard,
+                                Icons.keyboard,
                                 color: Colors.white,
                               ),
                             ),
@@ -67,9 +65,9 @@ class Login extends StatelessWidget {
                                   .textTheme
                                   .headline6
                                   ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
                             )
                           ],
                         ),
@@ -82,7 +80,7 @@ class Login extends StatelessWidget {
                           width: double.infinity,
                           constraints: BoxConstraints(
                             minHeight:
-                            MediaQuery.of(context).size.height - 180.0,
+                                MediaQuery.of(context).size.height - 180.0,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
@@ -115,7 +113,8 @@ class Login extends StatelessWidget {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10.0),
                                       borderSide: BorderSide(
-                                          color: Colors.grey), // Set the border color to grey
+                                          color: Colors
+                                              .grey), // Set the border color to grey
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10.0),
@@ -149,7 +148,8 @@ class Login extends StatelessWidget {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10.0),
                                       borderSide: BorderSide(
-                                          color: Colors.grey), // Set the border color to grey
+                                          color: Colors
+                                              .grey), // Set the border color to grey
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10.0),
@@ -227,6 +227,7 @@ class Login extends StatelessWidget {
       ),
     );
   }
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void loginAndAuthenticateUser(BuildContext context) async {
@@ -242,7 +243,8 @@ class Login extends StatelessWidget {
     Future signInWithEmailAndPassword(String email, String password) async {
       try {
         UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
-            email: emailcontroller.text.trim(), password: emailcontroller.text.trim());
+            email: emailcontroller.text.trim(),
+            password: emailcontroller.text.trim());
         User? user = result.user;
         return _firebaseAuth;
       } catch (error) {
@@ -252,18 +254,19 @@ class Login extends StatelessWidget {
     }
 
     final User? firebaseUser = (await _firebaseAuth
-        .signInWithEmailAndPassword(
-        email: emailcontroller.text.trim(),
-        password: passwordcontroller.text.trim())
-        .catchError((errMsg) {
+            .signInWithEmailAndPassword(
+                email: emailcontroller.text.trim(),
+                password: passwordcontroller.text.trim())
+            .catchError((errMsg) {
       Navigator.pop(context);
       displayToast("Error" + errMsg.toString(), context);
     }))
         .user;
     try {
       UserCredential userCredential =
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: emailcontroller.text.trim(), password: passwordcontroller.text.trim());
+          await _firebaseAuth.signInWithEmailAndPassword(
+              email: emailcontroller.text.trim(),
+              password: passwordcontroller.text.trim());
 
       if (clients != null) {
         AssistantMethod.getCurrentOnlineUserInfo(context);
@@ -284,5 +287,4 @@ class Login extends StatelessWidget {
 
 // user created
   }
-
 }
