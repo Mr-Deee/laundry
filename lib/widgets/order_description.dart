@@ -31,7 +31,7 @@ class _Problem_descriptionState extends State<Problem_description> {
   String? _currentAddress;
   Position? _currentPosition;
 
-  DatabaseReference? request;
+  // DatabaseReference? request;
 
   @override
   void initState() {
@@ -339,13 +339,13 @@ class _Problem_descriptionState extends State<Problem_description> {
       ));
 
   MakingRequest() {
-    request = FirebaseDatabase.instance.ref().child("Request").push();
+    // request = FirebaseDatabase.instance.ref().child("Request").push();
 
     // // Create a list to store the selected items
     // List<Map<String, dynamic>> selectedItemsList = [];
 
-    // // Create a list to store the selected items
-    // // Add each selected item with its count to the list
+    // // // Create a list to store the selected items
+    // // // Add each selected item with its count to the list
     // for (var entry in itemCountMap.entries) {
     //   selectedItemsList.add({
     //     'title': entry.key,
@@ -366,16 +366,16 @@ class _Problem_descriptionState extends State<Problem_description> {
       //   selectedItemTitle4,
       //   selectedItemTitle5
       // ],
-      // 'selectedItemImage': selectedItemImage,
+      'selectedItemImage': selectedItemImage,
       //New addition
       // 'SelectedItems2': selectedItemsList,
       // 'selectedItemCount': selectedItemCount,
       // 'Location': _currentAddress?.trim().toString(),
-      // 'Service Type': widget.title.toString(),
+      'Service Type': widget.title.toString(),
       // 'finalClient_address': _currentAddress?.trim().toString(),
     };
 
-    request?.set(rideInfoMap);
+    request.set(rideInfoMap);
   }
 
   Future<bool> _handleLocationPermission() async {
