@@ -349,7 +349,7 @@ class _Problem_descriptionState extends State<Problem_description> {
     for (var entry in itemCountMap.entries) {
       selectedItemsList.add({
         'title': entry.key,
-        // 'count': entry.value,
+        'count': entry.value,
       });
     }
 
