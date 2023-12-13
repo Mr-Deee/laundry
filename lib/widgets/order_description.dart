@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry/utils/constants.dart';
 import 'package:laundry/widgets/item_selection.dart';
 import 'package:provider/provider.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../main.dart';
 import '../models/Client.dart';
@@ -347,19 +346,13 @@ class _Problem_descriptionState extends State<Problem_description> {
 
     // Create a list to store the selected items
     // Add each selected item with its count to the list
-    // for (var entry in itemCountMap.entries) {
-    //   selectedItemsList.add({
-    //     'title': key,
-    //      'count': entry.value,
-    //   });
-    // }
-
-    itemCountMap.forEach((key, value) {
+    for (var entry in itemCountMap.entries) {
       selectedItemsList.add({
-        'title': key,
-        'count': value,
+        'title': entry.key,
+        'count': entry.value,
       });
-    });
+    }
+
     Map rideInfoMap = {
       // "client_phone":
       //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
@@ -373,25 +366,16 @@ class _Problem_descriptionState extends State<Problem_description> {
       //   selectedItemTitle4,
       //   selectedItemTitle5
       // ],
-      'selectedItemImage': selectedItemImage,
+      // 'selectedItemImage': selectedItemImage,
       //New addition
-      // 'SelectedItems2': selectedItemsList,
-      'selectedItemCount': selectedItemCount,
-      'Location': _currentAddress?.trim().toString(),
-      'Service Type': widget.title.toString(),
-      'finalClient_address': _currentAddress?.trim().toString(),
+      'SelectedItems2': selectedItemsList,
+      // 'selectedItemCount': selectedItemCount,
+      // 'Location': _currentAddress?.trim().toString(),
+      // 'Service Type': widget.title.toString(),
+      // 'finalClient_address': _currentAddress?.trim().toString(),
     };
 
     request?.set(rideInfoMap);
-
-    request?.set(rideInfoMap).then((value) {
-      // Successfully wrote to the database
-      print("Data written successfully");
-    }).catchError((error) {
-      displayToast("$error ", context);
-
-      print("Error writing to the database: $error");
-    });
   }
 
   Future<bool> _handleLocationPermission() async {
@@ -421,11 +405,5 @@ class _Problem_descriptionState extends State<Problem_description> {
       return false;
     }
     return true;
-  }
-
-  displayToast(String message, BuildContext context) {
-    Fluttertoast.showToast(msg: message);
-
-// user created
   }
 }
