@@ -21,7 +21,10 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-    AssistantMethod.getCurrentOnlineUserInfo(context);
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      await AssistantMethod.getCurrentOnlineUserInfo(context);
+      // Other initialization code here
+    });
   }
 
   // Track active index
