@@ -252,64 +252,62 @@ class _Problem_descriptionState extends State<Problem_description> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text('Location',
-                              style: GoogleFonts.openSans(
-                                color: Colors.black,
-                                fontSize: 18,
-                              )),
+                          // Text('Location',
+                          //     style: GoogleFonts.openSans(
+                          //       color: Colors.black,
+                          //       fontSize: 18,
+                          //     )),
 
                           //location
 
-                          Card(
-                              elevation: 8,
-                              shadowColor: Colors.white70,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
-                                  ),
-                                  side: BorderSide(
-                                      width: 2, color: Colors.white24)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Center(
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(Icons.location_on),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  '${_currentAddress ?? ""}',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .caption,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                        ],
-                                      ),
-                                    ])),
-                              )),
+                          // Card(
+                          //     elevation: 8,
+                          //     shadowColor: Colors.white70,
+                          //     shape: const RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.all(
+                          //           Radius.circular(20),
+                          //         ),
+                          //         side: BorderSide(
+                          //             width: 2, color: Colors.white24)),
+                          //     child: Padding(
+                          //       padding: const EdgeInsets.all(10.0),
+                          //       child: Center(
+                          //           child: Column(
+                          //               mainAxisAlignment:
+                          //                   MainAxisAlignment.center,
+                          //               children: [
+                          //             Row(
+                          //               children: <Widget>[
+                          //                 Icon(Icons.location_on),
+                          //                 SizedBox(
+                          //                   width: 8,
+                          //                 ),
+                          //                 Expanded(
+                          //                   child: Column(
+                          //                     crossAxisAlignment:
+                          //                         CrossAxisAlignment.start,
+                          //                     children: <Widget>[
+                          //                       Text(
+                          //                         '${_currentAddress ?? ""}',
+                          //                         style: Theme.of(context)
+                          //                             .textTheme
+                          //                             .caption,
+                          //                       ),
+                          //                     ],
+                          //                   ),
+                          //                 ),
+                          //                 SizedBox(
+                          //                   width: 8,
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //           ])),
+                          //     )),
 
                           const SizedBox(
                             height: 10,
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
+
                           Center(
                             child: Container(
                               margin: EdgeInsets.all(10),
