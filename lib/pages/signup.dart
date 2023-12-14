@@ -29,7 +29,7 @@ TextEditingController _phonecontroller = TextEditingController();
 TextEditingController _passwordcontroller = TextEditingController();
 File? _riderImage;
 
-
+bool _isPasswordVisible = false;
 final ImagePicker _imagePicker = ImagePicker();
 class _signupState extends State<signup> {
   @override
@@ -70,15 +70,15 @@ class _signupState extends State<signup> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Icon(
-                                Icons.keyboard,
-                                color: Colors.white,
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     Navigator.of(context).pop();
+                            //   },
+                            //   child: Icon(
+                            //     Icons.keyboard,
+                            //     color: Colors.white,
+                            //   ),
+                            // ),
                             SizedBox(
                               height: 20.0,
                             ),
@@ -103,7 +103,7 @@ class _signupState extends State<signup> {
                           width: double.infinity,
                           constraints: BoxConstraints(
                             minHeight:
-                            MediaQuery.of(context).size.height - 180.0,
+                            MediaQuery.of(context).size.height,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
@@ -280,7 +280,7 @@ class _signupState extends State<signup> {
                                               color: Colors.white.withOpacity(.9),
                                             ),
                                             controller: _passwordcontroller,
-                                            obscureText: true,
+                                            obscureText: !_isPasswordVisible,
                                             // onChanged: (value){
                                             //   _passwordcontroller=value as TextEditingController;
                                             // },
@@ -289,6 +289,17 @@ class _signupState extends State<signup> {
                                               prefixIcon: Icon(
                                                 Icons.password,
                                                 color: Colors.white.withOpacity(.8),
+                                              ),
+                                              suffixIcon: GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    _isPasswordVisible = !_isPasswordVisible;
+                                                  });
+                                                },
+                                                child: Icon(
+                                                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                               border: InputBorder.none,
                                               hintMaxLines: 1,
@@ -317,36 +328,7 @@ class _signupState extends State<signup> {
 
 
                                   SizedBox(height: size.width * 0.019),
-                                  // InkWell(
-                                  //   splashColor: Colors.transparent,
-                                  //   highlightColor: Colors.transparent,
-                                  //   onTap: () {
-                                  //     // registerInfirestore(context);
-                                  //     registerNewUser(context);
-                                  //     HapticFeedback.lightImpact();
-                                  //
-                                  //   },
-                                  //   child: Container(
-                                  //     margin: EdgeInsets.only(
-                                  //       bottom: size.width * .05,
-                                  //     ),
-                                  //     height: size.width / 8,
-                                  //     width: size.width / 1.25,
-                                  //     alignment: Alignment.center,
-                                  //     decoration: BoxDecoration(
-                                  //       color:  Color(0xFFF169F00),
-                                  //       borderRadius: BorderRadius.circular(20),
-                                  //     ),
-                                  //     child: Text(
-                                  //       'Sign-up',
-                                  //       style: TextStyle(
-                                  //         color: Colors.white,
-                                  //         fontSize: 20,
-                                  //         fontWeight: FontWeight.w600,
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // ),
+
                                 ],
                               ),
                               SizedBox(
@@ -374,7 +356,7 @@ class _signupState extends State<signup> {
                                   height: 50,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xFFF169F00)),
+                                        backgroundColor:  Color(0xff56d6bb)),
                                     onPressed: () {
 
                                       registerNewUser(context);
