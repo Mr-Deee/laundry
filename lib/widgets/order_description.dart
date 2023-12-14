@@ -166,10 +166,10 @@ class _Problem_descriptionState extends State<Problem_description> {
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount1 = count.toString();
-                                          itemCountMap[selectedItemTitle
-                                                  .toString()] =
-                                              int.parse(
-                                                  selectedItemCount1.toString());
+                                          itemCountMap[
+                                              selectedItemTitle
+                                                  .toString()] = int.parse(
+                                              selectedItemCount1.toString());
                                         }),
                                       }),
                             ],
@@ -189,10 +189,10 @@ class _Problem_descriptionState extends State<Problem_description> {
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount2 = count.toString();
-                                          itemCountMap[selectedItemTitle
-                                                  .toString()] =
-                                              int.parse(
-                                                  selectedItemCount2.toString());
+                                          itemCountMap[
+                                              selectedItemTitle
+                                                  .toString()] = int.parse(
+                                              selectedItemCount2.toString());
                                         }),
                                       }),
                               item_selection(
@@ -203,10 +203,10 @@ class _Problem_descriptionState extends State<Problem_description> {
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount3 = count.toString();
-                                          itemCountMap[selectedItemTitle
-                                                  .toString()] =
-                                              int.parse(
-                                                  selectedItemCount3.toString());
+                                          itemCountMap[
+                                              selectedItemTitle
+                                                  .toString()] = int.parse(
+                                              selectedItemCount3.toString());
                                         }),
                                       }),
                             ],
@@ -228,7 +228,8 @@ class _Problem_descriptionState extends State<Problem_description> {
                                     selectedItemImage = image;
                                     selectedItemCount4 = count.toString();
                                     itemCountMap[selectedItemTitle.toString()] =
-                                        int.parse(selectedItemCount4.toString());
+                                        int.parse(
+                                            selectedItemCount4.toString());
                                   })
                                 },
                               ),
@@ -242,10 +243,10 @@ class _Problem_descriptionState extends State<Problem_description> {
                                           selectedItemCount5 = count.toString();
 
                                           // Update itemCountMap when an item is selected
-                                          itemCountMap[selectedItemTitle
-                                                  .toString()] =
-                                              int.parse(
-                                                  selectedItemCount5.toString());
+                                          itemCountMap[
+                                              selectedItemTitle
+                                                  .toString()] = int.parse(
+                                              selectedItemCount5.toString());
                                         }),
                                       })
                             ],
@@ -324,7 +325,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    MakingRequest();
+                                    makingRequest();
                                   },
                                   child: Text(
                                     "Complete request",
@@ -346,66 +347,74 @@ class _Problem_descriptionState extends State<Problem_description> {
         style: TextStyle(fontSize: 20),
       ));
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  MakingRequest() {
 
-
+  Future<void> makingRequest() async {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return Dialog(
-              backgroundColor: Colors.transparent,
-              child: Container(
-                  margin: EdgeInsets.all(15.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.0)
-                  ),
-                  child: Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            SizedBox(width: 6.0,),
-                            CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.black),),
-                            SizedBox(width: 26.0,),
-                            Text("Adding Request, please wait...")
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            margin: EdgeInsets.all(15.0),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(15.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 6.0,
+                    ),
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                    ),
+                    SizedBox(
+                      width: 26.0,
+                    ),
+                    Text("Adding Request, please wait...")
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
 
-                          ],
-                        ),
-                      ))));
-        });
-    request = FirebaseDatabase.instance.ref().child("Request").child(_firebaseAuth.currentUser!.uid).push();
+    try {
+      request = FirebaseDatabase.instance
+          .ref()
+          .child("Request")
+          .child(_firebaseAuth.currentUser!.uid)
+          .push();
 
+      Map rideInfoMap = {
+        "created_at": DateTime.now().toString(),
+        'selectedItemCount': selectedItemCount,
+        'Location': _currentAddress?.trim().toString(),
+        'Service Type': widget.title.toString(),
+        'finalClient_address': _currentAddress?.trim().toString(),
+      };
 
-    Map rideInfoMap = {
-      // "client_phone":
-      //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
-      "created_at": DateTime.now().toString(),
-      // 'client_name':
-      //     Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-      'selectedItemCount': selectedItemCount,
-      'Location': _currentAddress?.trim().toString(),
-      'Service Type': widget.title.toString(),
-      'finalClient_address': _currentAddress?.trim().toString(),
-    };
+      await request?.set(rideInfoMap);
+      await request?.child("SelectedItem").update({
+        "Shirt": selectedItemCount,
+        "T-shirt": selectedItemCount1,
+        "Suit": selectedItemCount2,
+        "Trouser": selectedItemCount3,
+        "Skirt": selectedItemCount4,
+        "Blouse": selectedItemCount5,
+      });
 
-    request?.set(rideInfoMap);
-    request?.child("SelectedItem").update({
-      "Shirt":selectedItemCount,
-      "T-shirt":selectedItemCount1,
-      "Suit":selectedItemCount2,
-      "Trouser":selectedItemCount3,
-      "Skirt":selectedItemCount4,
-      "Blouse":selectedItemCount5,
-
-
-    }).then((_) {
       Navigator.pop(context); // close the progress dialog
+
+      // Show success message
       Fluttertoast.showToast(
         msg: "Request submitted successfully. Thank you!",
         toastLength: Toast.LENGTH_SHORT,
@@ -415,8 +424,10 @@ class _Problem_descriptionState extends State<Problem_description> {
         textColor: Colors.black,
         fontSize: 16.0,
       );
-    }).catchError((error) {
+    } catch (error) {
       Navigator.pop(context); // close the progress dialog
+
+      // Show error message
       Fluttertoast.showToast(
         msg: "Error submitting request. Please try again.",
         toastLength: Toast.LENGTH_SHORT,
@@ -427,8 +438,89 @@ class _Problem_descriptionState extends State<Problem_description> {
         fontSize: 16.0,
       );
       print("Error submitting request: $error");
-    });
+    }
   }
+
+  // MakingRequest() {
+
+  //   showDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       builder: (BuildContext context) {
+  //         return Dialog(
+  //             backgroundColor: Colors.transparent,
+  //             child: Container(
+  //                 margin: EdgeInsets.all(15.0),
+  //                 width: double.infinity,
+  //                 decoration: BoxDecoration(
+  //                     color: Colors.white,
+  //                     borderRadius: BorderRadius.circular(20.0)
+  //                 ),
+  //                 child: Padding(
+  //                     padding: EdgeInsets.all(15.0),
+  //                     child: SingleChildScrollView(
+  //                       scrollDirection: Axis.horizontal,
+  //                       child: Row(
+  //                         children: [
+  //                           SizedBox(width: 6.0,),
+  //                           CircularProgressIndicator(
+  //                             valueColor: AlwaysStoppedAnimation<Color>(
+  //                                 Colors.black),),
+  //                           SizedBox(width: 26.0,),
+  //                           Text("Adding Request, please wait...")
+
+  //                         ],
+  //                       ),
+  //                     ))));
+  //       });
+  //   request = FirebaseDatabase.instance.ref().child("Request").child(_firebaseAuth.currentUser!.uid).push();
+
+  //   Map rideInfoMap = {
+  //     // "client_phone":
+  //     //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
+  //     "created_at": DateTime.now().toString(),
+  //     // 'client_name':
+  //     //     Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
+  //     'selectedItemCount': selectedItemCount,
+  //     'Location': _currentAddress?.trim().toString(),
+  //     'Service Type': widget.title.toString(),
+  //     'finalClient_address': _currentAddress?.trim().toString(),
+  //   };
+
+  //   request?.set(rideInfoMap);
+  //   request?.child("SelectedItem").update({
+  //     "Shirt":selectedItemCount,
+  //     "T-shirt":selectedItemCount1,
+  //     "Suit":selectedItemCount2,
+  //     "Trouser":selectedItemCount3,
+  //     "Skirt":selectedItemCount4,
+  //     "Blouse":selectedItemCount5,
+
+  //   }).then((_) {
+  //     Navigator.pop(context); // close the progress dialog
+  //     Fluttertoast.showToast(
+  //       msg: "Request submitted successfully. Thank you!",
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.BOTTOM,
+  //       timeInSecForIosWeb: 1,
+  //       backgroundColor: Colors.green,
+  //       textColor: Colors.black,
+  //       fontSize: 16.0,
+  //     );
+  //   }).catchError((error) {
+  //     Navigator.pop(context); // close the progress dialog
+  //     Fluttertoast.showToast(
+  //       msg: "Error submitting request. Please try again.",
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.BOTTOM,
+  //       timeInSecForIosWeb: 1,
+  //       backgroundColor: Colors.red,
+  //       textColor: Colors.white,
+  //       fontSize: 16.0,
+  //     );
+  //     print("Error submitting request: $error");
+  //   });
+  // }
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
