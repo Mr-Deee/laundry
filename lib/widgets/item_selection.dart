@@ -76,15 +76,23 @@ class _item_selectionState extends State<item_selection> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                              onTap: () {
-                                onItemSelected?.call(title!, image!, count);
-                                incrementCounter();
-                              },
-                              child: Text(
-                                '+',
-                                style: TextStyle(fontSize: 23),
-                              )),
+
+                          IconButton(
+                            onPressed: () {
+                              onItemSelected?.call(title!, image!, count);
+                              incrementCounter();
+                              // Add your button click logic here
+                            },
+                            icon: Icon(
+                              Icons.add_circle,
+                              size: 23,
+                            ),
+                            // label: Text(
+                            //   '+',
+                            //   style: TextStyle(fontSize: 23),
+                            // ),
+                          ),
+
                           Text(
                             '$count',
                             style: GoogleFonts.openSans(
@@ -93,14 +101,20 @@ class _item_selectionState extends State<item_selection> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          GestureDetector(
-                              onTap: () {
-                                decrementCounter();
-                              },
-                              child: Text(
-                                '-',
-                                style: TextStyle(fontSize: 23),
-                              )),
+
+
+
+                          IconButton(
+                            onPressed: () {
+                              onItemSelected?.call(title!, image!, count);
+                              decrementCounter();
+                              // Add your button click logic here
+                            },
+                            icon: Icon(
+                              Icons.remove_circle,
+                              size: 23,
+                            ),),
+
                         ],
                       ),
                     ],

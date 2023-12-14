@@ -9,6 +9,8 @@ import '../utils/helper.dart';
 import '../widgets/app_button.dart';
 import '../widgets/input_widget.dart';
 import '../widgets/progressDialog.dart';
+import 'dashboard.dart';
+import 'laundryserviceDashboard.dart';
 
 class Login extends StatelessWidget {
   TextEditingController emailcontroller = TextEditingController();
@@ -220,63 +222,84 @@ class Login extends StatelessWidget {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+
+
+
   void loginAndAuthenticateUser(BuildContext context) async {
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return ProgressDialog(
-            message: "Logging you ,Please wait.",
-          );
-        }
+          return Dialog(
+              backgroundColor: Colors.black,
+              child: Container(
+                  margin: EdgeInsets.all(15.0),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(6.0)
+                  ),
+                  child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            SizedBox(width: 6.0,),
+                            CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white38),),
+                            SizedBox(width: 26.0,),
 
-        );
 
-    Future signInWithEmailAndPassword(String email, String password) async {
-      try {
-        UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
-            email: emailcontroller.text.trim(),
-            password: emailcontroller.text.trim());
-        User? user = result.user;
-        return _firebaseAuth;
-      } catch (error) {
-        print(error.toString());
-        return null;
-      }
-    }
+                          ],
+                        ),
+                      ))));});
 
     final User? firebaseUser = (await _firebaseAuth
-            .signInWithEmailAndPassword(
-                email: emailcontroller.text.trim(),
-                password: passwordcontroller.text.trim())
-            .catchError((errMsg) {
+        .signInWithEmailAndPassword(
+      email: emailcontroller.text.toString().trim(),
+      password: passwordcontroller.text.toString().trim(),
+    )
+        .catchError((errMsg) {
       Navigator.pop(context);
       displayToast("Error" + errMsg.toString(), context);
     }))
         .user;
     try {
       UserCredential userCredential =
-          await _firebaseAuth.signInWithEmailAndPassword(
-              email: emailcontroller.text.trim(),
-              password: passwordcontroller.text.trim());
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: emailcontroller.text,
+          password: passwordcontroller.text);
 
-      if (clients != null) {
-        AssistantMethod.getCurrentOnlineUserInfo(context);
+      const String adminEmail = 'officialhdp@gmail.com';
+      if(emailcontroller.text==adminEmail){
 
-        Navigator.of(context).pushNamed("/dashboard");
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => LaundryService()));
 
+      }
+      else
+      if (firebaseUser != null) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Dashboard()));
         displayToast("Logged-in ", context);
       } else {
         displayToast("Error: Cannot be signed in", context);
       }
+
     } catch (e) {
       // handle error
     }
   }
-
-  displayToast(String message, BuildContext context) {
-    Fluttertoast.showToast(msg: message);
-
-// user created
-  }
 }
+
+displayToast(String message, BuildContext context) {
+  Fluttertoast.showToast(msg: message);
+}
+
+
+
+

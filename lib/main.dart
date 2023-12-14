@@ -3,6 +3,7 @@ import 'package:laundry/models/Client.dart';
 import 'package:laundry/pages/dashboard.dart';
 
 import 'package:laundry/pages/landingpage.dart';
+import 'package:laundry/pages/laundryserviceDashboard.dart';
 import 'package:laundry/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,7 @@ void main() async {
 }
 
 DatabaseReference clients = FirebaseDatabase.instance.ref().child("Clients");
+DatabaseReference admin = FirebaseDatabase.instance.ref().child("Admin");
 DatabaseReference request = FirebaseDatabase.instance.ref().child("Request");
 
 class MyApp extends StatelessWidget {
@@ -44,11 +46,12 @@ class MyApp extends StatelessWidget {
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),
 
         initialRoute: FirebaseAuth.instance.currentUser == null
-            ? '/login'
+            ? '/landing'
             : '/dashboard',
         routes: {
           // "/splash":(context) => SplashScreen(),
           "/dashboard": (context) => Dashboard(),
+          "/LaundryService": (context) => LaundryService(),
           "/SignUP": (context) => signup(),
           "/login": (context) => Login(),
           "/landing": (context) => Landingpage(),
