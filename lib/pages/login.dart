@@ -244,8 +244,10 @@ class Login extends StatelessWidget {
 
       if (user != null) {
         // Successful login
-        AssistantMethod.getCurrentOnlineUserInfo(context);
+
         Navigator.of(context).pushNamed("/dashboard");
+
+        AssistantMethod.getCurrentOnlineUserInfo(context);
         displayToast("Logged-in", context);
       } else {
         // Handle the case where user is null

@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:laundry/models/assitantmethods.dart';
 import 'package:laundry/utils/constants.dart';
 import 'package:laundry/widgets/item_selection.dart';
 import 'package:provider/provider.dart';
@@ -34,18 +35,14 @@ class _Problem_descriptionState extends State<Problem_description> {
   Position? _currentPosition;
 
   DatabaseReference? request;
-
   @override
   void initState() {
-    _getCurrentPosition();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   Provider.of<helper>(context, listen: false).getCurrentLocation();
-    //   Provider.of<helper>(context, listen: false).getAddressFromLatLng();
-    //
-    //
-    // });
     super.initState();
-    //  print("Current : $_currentAddress");
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      await _getCurrentPosition();
+      await AssistantMethod.getCurrentOnlineUserInfo(context);
+      // Other initialization code here
+    });
   }
 
   final items = [

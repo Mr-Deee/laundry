@@ -18,19 +18,17 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
-
   @override
   void initState() {
     super.initState();
-
-    AssistantMethod.getCurrentOnlineUserInfo(context);}
+    AssistantMethod.getCurrentOnlineUserInfo(context);
+  }
 
   // Track active index
   int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final name = Provider.of<Client>(context).riderInfo?.firstname??"Loading";
+    final name = Provider.of<Client>(context).riderInfo?.firstname ?? "Loading";
     return Scaffold(
 //       bottomNavigationBar: CurvedNavigationBar(
 //         backgroundColor: Constants.scaffoldBackgroundColor,
@@ -81,15 +79,12 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
           ),
-
           SingleChildScrollView(
             child: Container(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
-
                   SizedBox(
                     height: kToolbarHeight,
                   ),
@@ -117,7 +112,6 @@ class _DashboardState extends State<Dashboard> {
                                           color: Colors.white,
                                         ),
                                   ),
-
                                   TextSpan(
                                     text: name!,
                                     style: Theme.of(context)
@@ -137,11 +131,10 @@ class _DashboardState extends State<Dashboard> {
 
                             IconButton(
                               onPressed: () {
-
-
                                 showDialog<void>(
                                   context: context,
-                                  barrierDismissible: false, // user must tap button!
+                                  barrierDismissible:
+                                      false, // user must tap button!
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: Text('Sign Out'),
@@ -149,7 +142,8 @@ class _DashboardState extends State<Dashboard> {
                                       content: SingleChildScrollView(
                                         child: Column(
                                           children: <Widget>[
-                                            Text('Are you certain you want to Sign Out?'),
+                                            Text(
+                                                'Are you certain you want to Sign Out?'),
                                           ],
                                         ),
                                       ),
@@ -157,13 +151,16 @@ class _DashboardState extends State<Dashboard> {
                                         TextButton(
                                           child: Text(
                                             'Yes',
-                                            style: TextStyle(color: Colors.black),
+                                            style:
+                                                TextStyle(color: Colors.black),
                                           ),
                                           onPressed: () {
                                             print('yes');
                                             FirebaseAuth.instance.signOut();
                                             Navigator.pushNamedAndRemoveUntil(
-                                                context, "/login", (route) => false);
+                                                context,
+                                                "/login",
+                                                (route) => false);
                                             // Navigator.of(context).pop();
                                           },
                                         ),
