@@ -88,6 +88,11 @@ class _Problem_descriptionState extends State<Problem_description> {
       debugPrint(e);
     });
   }
+late int amount;
+  late  int amount1;
+  late int amount2;
+  late int amount3;
+  late int amount4;
 
   String? selectedItemImage;
   String? selectedItemTitle;
@@ -148,6 +153,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'Shirt',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
+                                          amount=2;
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount = count.toString();
@@ -162,6 +168,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'T-Shirt',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
+                                          amount1=2;
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount1 = count.toString();
@@ -185,6 +192,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'suit',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
+                                          amount2=5;
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount2 = count.toString();
@@ -199,6 +207,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                   title: 'Trouser',
                                   onItemSelected: (name, image, count) => {
                                         setState(() {
+                                          amount3= 3;
                                           selectedItemTitle = name;
                                           selectedItemImage = image;
                                           selectedItemCount3 = count.toString();
@@ -223,6 +232,7 @@ class _Problem_descriptionState extends State<Problem_description> {
                                 title: 'Skirt',
                                 onItemSelected: (name, image, count) => {
                                   setState(() {
+                                    amount4=2;
                                     selectedItemTitle = name;
                                     selectedItemImage = image;
                                     selectedItemCount4 = count.toString();
@@ -345,6 +355,25 @@ class _Problem_descriptionState extends State<Problem_description> {
       ));
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  int totalSum = 0;
+  void calculateTotal() {
+
+    itemCountMap.forEach((key, value) {
+      if (key == 'Shirt') {
+        totalSum += amount * value;
+      } else if (key == 'T-Shirt') {
+        totalSum += amount1 * value;
+      } else if (key == 'suit') {
+        totalSum += amount2 * value;
+      } else if (key == 'Trouser') {
+        totalSum += amount3 * value;
+      } else if (key == 'Skirt') {
+        totalSum += amount4 * value;
+      }
+    });
+    print("Total Sum: $totalSum");
+  }
+
   Future<void> makingRequest() async {
     showDialog(
       context: context,
@@ -398,6 +427,7 @@ class _Problem_descriptionState extends State<Problem_description> {
         "UserName":  USERNAME,
         "Phone":  phone,
         "created_at": DateTime.now().toString(),
+        "Amount": totalSum,
         'selectedItemCount': selectedItemCount,
         'Location': _currentAddress?.trim().toString(),
         'Service Type': widget.title.toString(),
@@ -443,86 +473,6 @@ class _Problem_descriptionState extends State<Problem_description> {
     }
   }
 
-  // MakingRequest() {
-
-  //   showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (BuildContext context) {
-  //         return Dialog(
-  //             backgroundColor: Colors.transparent,
-  //             child: Container(
-  //                 margin: EdgeInsets.all(15.0),
-  //                 width: double.infinity,
-  //                 decoration: BoxDecoration(
-  //                     color: Colors.white,
-  //                     borderRadius: BorderRadius.circular(20.0)
-  //                 ),
-  //                 child: Padding(
-  //                     padding: EdgeInsets.all(15.0),
-  //                     child: SingleChildScrollView(
-  //                       scrollDirection: Axis.horizontal,
-  //                       child: Row(
-  //                         children: [
-  //                           SizedBox(width: 6.0,),
-  //                           CircularProgressIndicator(
-  //                             valueColor: AlwaysStoppedAnimation<Color>(
-  //                                 Colors.black),),
-  //                           SizedBox(width: 26.0,),
-  //                           Text("Adding Request, please wait...")
-
-  //                         ],
-  //                       ),
-  //                     ))));
-  //       });
-  //   request = FirebaseDatabase.instance.ref().child("Request").child(_firebaseAuth.currentUser!.uid).push();
-
-  //   Map rideInfoMap = {
-  //     // "client_phone":
-  //     //     Provider.of<Client>(context, listen: false).riderInfo?.phone,
-  //     "created_at": DateTime.now().toString(),
-  //     // 'client_name':
-  //     //     Provider.of<Client>(context, listen: false).riderInfo?.firstname!,
-  //     'selectedItemCount': selectedItemCount,
-  //     'Location': _currentAddress?.trim().toString(),
-  //     'Service Type': widget.title.toString(),
-  //     'finalClient_address': _currentAddress?.trim().toString(),
-  //   };
-
-  //   request?.set(rideInfoMap);
-  //   request?.child("SelectedItem").update({
-  //     "Shirt":selectedItemCount,
-  //     "T-shirt":selectedItemCount1,
-  //     "Suit":selectedItemCount2,
-  //     "Trouser":selectedItemCount3,
-  //     "Skirt":selectedItemCount4,
-  //     "Blouse":selectedItemCount5,
-
-  //   }).then((_) {
-  //     Navigator.pop(context); // close the progress dialog
-  //     Fluttertoast.showToast(
-  //       msg: "Request submitted successfully. Thank you!",
-  //       toastLength: Toast.LENGTH_SHORT,
-  //       gravity: ToastGravity.BOTTOM,
-  //       timeInSecForIosWeb: 1,
-  //       backgroundColor: Colors.green,
-  //       textColor: Colors.black,
-  //       fontSize: 16.0,
-  //     );
-  //   }).catchError((error) {
-  //     Navigator.pop(context); // close the progress dialog
-  //     Fluttertoast.showToast(
-  //       msg: "Error submitting request. Please try again.",
-  //       toastLength: Toast.LENGTH_SHORT,
-  //       gravity: ToastGravity.BOTTOM,
-  //       timeInSecForIosWeb: 1,
-  //       backgroundColor: Colors.red,
-  //       textColor: Colors.white,
-  //       fontSize: 16.0,
-  //     );
-  //     print("Error submitting request: $error");
-  //   });
-  // }
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
