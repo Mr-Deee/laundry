@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'WashRequest.dart';
+
 class LaundryService extends StatefulWidget {
   const LaundryService({Key? key}) : super(key: key);
 
@@ -14,9 +16,8 @@ class LaundryService_State extends State<LaundryService> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(children: [
-
         Padding(
-          padding: const EdgeInsets.only(top:18.0),
+          padding: const EdgeInsets.only(top: 18.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -24,8 +25,7 @@ class LaundryService_State extends State<LaundryService> {
                 onPressed: () {
                   showDialog<void>(
                     context: context,
-                    barrierDismissible:
-                    false, // user must tap button!
+                    barrierDismissible: false, // user must tap button!
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: Text('Sign Out'),
@@ -33,8 +33,7 @@ class LaundryService_State extends State<LaundryService> {
                         content: SingleChildScrollView(
                           child: Column(
                             children: <Widget>[
-                              Text(
-                                  'Are you certain you want to Sign Out?'),
+                              Text('Are you certain you want to Sign Out?'),
                             ],
                           ),
                         ),
@@ -42,16 +41,13 @@ class LaundryService_State extends State<LaundryService> {
                           TextButton(
                             child: Text(
                               'Yes',
-                              style:
-                              TextStyle(color: Colors.black),
+                              style: TextStyle(color: Colors.black),
                             ),
                             onPressed: () {
                               print('yes');
                               FirebaseAuth.instance.signOut();
                               Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  "/login",
-                                      (route) => false);
+                                  context, "/login", (route) => false);
                               // Navigator.of(context).pop();
                             },
                           ),
@@ -69,7 +65,7 @@ class LaundryService_State extends State<LaundryService> {
                     },
                   );
                 },
-                icon:  Icon(
+                icon: Icon(
                   Icons.login_outlined,
                   color: Colors.black,
                 ),
@@ -89,11 +85,11 @@ class LaundryService_State extends State<LaundryService> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-
                 GestureDetector(
-                  onTap:(){
-
-          },
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => washrequest()));
+                  },
                   child: Padding(
                     padding: EdgeInsets.only(top: 28.0),
                     child: Column(
@@ -109,61 +105,86 @@ class LaundryService_State extends State<LaundryService> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 28.0),
-                  child: Column(
-                    children: [
-                      Image(
-                        image: AssetImage(
-                          "assets/images/ironing.png",
+                GestureDetector(
+                  onTap: () {},
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 28.0),
+                    child: Column(
+                      children: [
+                        Image(
+                          image: AssetImage(
+                            "assets/images/ironing.png",
+                          ),
+                          height: 70,
                         ),
-                        height: 70,
-                      ),
-                      Center(child: Text("Ironing"))
-                    ],
+                        Center(child: Text("Ironing"))
+                      ],
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 28.0),
-                  child: Column(
-                    children: [
-                      Image(
-                        image: AssetImage(
-                          "assets/images/dry-cleaning.png",
+                GestureDetector(
+                  onTap: () {},
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 28.0),
+                    child: Column(
+                      children: [
+                        Image(
+                          image: AssetImage(
+                            "assets/images/dry-cleaning.png",
+                          ),
+                          height: 70,
                         ),
-                        height: 70,
-                      ),
-                      Center(child: Text("DryClean"))
-                    ],
+                        Center(child: Text("DryClean"))
+                      ],
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 28.0),
-                  child: Column(
-                    children: [
-                      Image(
-                        image: AssetImage(
-                          "assets/images/running-shoes.png",
+                GestureDetector(
+                  onTap: () {},
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 28.0),
+                    child: Column(
+                      children: [
+                        Image(
+                          image: AssetImage(
+                            "assets/images/running-shoes.png",
+                          ),
+                          height: 70,
                         ),
-                        height: 70,
-                      ),
-                      Center(child: Text("Other"))
-                    ],
+                        Center(child: Text("Other"))
+                      ],
+                    ),
                   ),
                 ),
-
               ],
             ),
           ),
         ),
-        SizedBox(height: 29,),
+        SizedBox(
+          height: 12,
+        ),
         Container(
-          decoration: BoxDecoration(  
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: Colors.blue,),
-          height: 383,
+            color: Colors.blue,
+          ),
+          // height: MediaQuery.of(context).size.height,
           width: 354,
-
+          child: Column(
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Text(
+                      "Dashboard",
+                      style: TextStyle(fontSize: 23),
+                    ),
+                    Row(children: [])
+                  ],
+                ),
+              )
+            ],
+          ),
         )
         // Column(
         //   children: [

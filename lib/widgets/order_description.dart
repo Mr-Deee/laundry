@@ -38,6 +38,8 @@ class _Problem_descriptionState extends State<Problem_description> {
   @override
   void initState() {
     super.initState();
+    // final USERNAME= Provider.of<Client>(context).riderInfo?.firstname??"";
+
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       await _getCurrentPosition();
       await AssistantMethod.getCurrentOnlineUserInfo(context);
@@ -103,7 +105,7 @@ class _Problem_descriptionState extends State<Problem_description> {
 
   @override
   Widget build(BuildContext context) {
-    // Provider.of<helper>(context).getCurrentLocation();
+    final USERNAME= Provider.of<Client>(context).riderInfo?.firstname??"";
     // final Helper =Provider.of<helper>(context) ;
 
     var size = MediaQuery.of(context).size;
@@ -386,10 +388,13 @@ class _Problem_descriptionState extends State<Problem_description> {
       request = FirebaseDatabase.instance
           .ref()
           .child("Request")
-          .child(_firebaseAuth.currentUser!.uid)
+          // .child(_firebaseAuth.currentUser!.uid)
           .push();
+      final USERNAME= Provider.of<Client>(context,listen: false).riderInfo?.firstname??"";
 
       Map rideInfoMap = {
+        "created_at": DateTime.now().toString(),
+        "UserName":  USERNAME,
         "created_at": DateTime.now().toString(),
         'selectedItemCount': selectedItemCount,
         'Location': _currentAddress?.trim().toString(),
