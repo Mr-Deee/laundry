@@ -391,10 +391,12 @@ class _Problem_descriptionState extends State<Problem_description> {
           // .child(_firebaseAuth.currentUser!.uid)
           .push();
       final USERNAME= Provider.of<Client>(context,listen: false).riderInfo?.firstname??"";
+      final phone= Provider.of<Client>(context,listen: false).riderInfo?.phone??"";
 
       Map rideInfoMap = {
         "created_at": DateTime.now().toString(),
         "UserName":  USERNAME,
+        "Phone":  phone,
         "created_at": DateTime.now().toString(),
         'selectedItemCount': selectedItemCount,
         'Location': _currentAddress?.trim().toString(),
