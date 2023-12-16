@@ -36,8 +36,8 @@ class _item_selectionState extends State<item_selection> {
             // scaleFactor: 1.5,
             // onPressed: ontap,
             child: Container(
-              height: 160,
-              width: 149,
+              height: 150,
+              width: 129,
               decoration: BoxDecoration(
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(12),

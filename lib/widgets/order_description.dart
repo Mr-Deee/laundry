@@ -327,6 +327,7 @@ late int amount;
                               width: size.width * .6,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(9),
                                     ),
@@ -339,6 +340,7 @@ late int amount;
                                     "Complete request",
                                     style: TextStyle(
                                         fontSize: 20,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   )),
                             ),

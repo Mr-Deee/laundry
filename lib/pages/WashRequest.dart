@@ -10,10 +10,13 @@ class washrequest extends StatefulWidget {
 }
 
 class _washrequestState extends State<washrequest> {
+  DatabaseReference? _databaseReference;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _databaseReference = FirebaseDatabase.instance.ref().child('Request');
+    print(_databaseReference);
 
     Getrequest();
   }
@@ -30,20 +33,20 @@ class _washrequestState extends State<washrequest> {
           child: Center(
             child: FutureBuilder<DatabaseEvent>(
               // Replace 'your_wash_request_id' with an actual request ID from your database
-              future: _databaseReference?.orderByKey().once(),
+              future: _databaseReference?.once(),
               builder: (context, AsyncSnapshot<DatabaseEvent> event) {
                 if (event.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (event.hasError) {
                   return Text('Error: ${event.error}');
                 } else {
-                  Map<dynamic, dynamic>? requestData = event.data?.snapshot.value as Map?;
+                  Map<dynamic, dynamic>? requestData = event.data?.snapshot.value as Map<dynamic, dynamic>?;
                   if (requestData != null) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Text('Name: ${requestData['name']}'),
-                        Text('Item Names: ${requestData['SelectedItem']}'),
+                        Text('ItemNames: ${requestData['UserName']}'),
                         // Text('Count: ${requestData['count']}'),
                         Text('Status: ${requestData['status']}'),
                         Text('Date: ${requestData['created_at']}'),
@@ -88,8 +91,11 @@ class _washrequestState extends State<washrequest> {
       )
     );
   }
-  DatabaseReference? _databaseReference;
-   Getrequest(){
+
+
+
+
+   void Getrequest(){
      _databaseReference = FirebaseDatabase.instance.ref().child('Request');
      // Add listener to the database reference
      _databaseReference?.onValue.listen((DatabaseEvent event) {
