@@ -18,97 +18,91 @@ class _washrequestState extends State<washrequest> {
     _databaseReference = FirebaseDatabase.instance.ref().child('Request');
     print(_databaseReference);
 
-    Getrequest();
+    fetchData();
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
 
 
-      body:Container(
-        child: Column(
-          children: [
-            Text(""),
-        Center(
-          child: Center(
-            child: FutureBuilder<DatabaseEvent>(
-              // Replace 'your_wash_request_id' with an actual request ID from your database
-              future: _databaseReference?.once(),
-              builder: (context, AsyncSnapshot<DatabaseEvent> event) {
-                if (event.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (event.hasError) {
-                  return Text('Error: ${event.error}');
-                } else {
-                  Map<dynamic, dynamic>? requestData = event.data?.snapshot.value as Map<dynamic, dynamic>?;
-                  if (requestData != null) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Text('Name: ${requestData['name']}'),
-                        Text('ItemNames: ${requestData['UserName']}'),
-                        // Text('Count: ${requestData['count']}'),
-                        Text('Status: ${requestData['status']}'),
-                        Text('Date: ${requestData['created_at']}'),
-                        SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Set status to 'Started' on button tap
-                            // updateStatus('your_wash_request_id', 'Started');
-                            setState(() {
-                              requestData['status'] = 'Started';
-                            });
-                          },
-                          child: Text('Start'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Set status to 'Finished' on button tap
-                            // updateStatus('your_wash_request_id', 'Finished');
-                            setState(() {
-                              requestData['status'] = 'Finished';
-                            });
-                          },
-                          child: Text('Finish'),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return Text('No wash requests found.');
-                  }
-                }
+      body:FutureBuilder(
+        future: fetchData(),
+        builder: (context, event) {
+          if (event.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          } else if (event.hasError) {
+            return Text('Error: ${event.error}');
+          } else {
+            List<Map<String, dynamic>> dd =
+            event.data as List<Map<String, dynamic>>;
+            print(dd);
+            return ListView.builder(
+              itemCount: dd.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('ItemNames: ${dd[index]['UserName']}'),
+                      // Text('Status: ${data[index]['status']}'),
+                      // Text('Date: ${data[index]['created_at']}'),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            dd[index]['status'] = 'Started';
+                          });
+                          // Call your function to update status
+                          // updateStatus('your_wash_request_id', 'Started');
+                        },
+                        child: Text('Start'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            dd[index]['status'] = 'Finished';
+                          });
+                          // Call your function to update status
+                          // updateStatus('your_wash_request_id', 'Finished');
+                        },
+                        child: Text('Finish'),
+                      ),
+                    ],
+                  ),
+                );
               },
-            ),
-          ),
-        ),
-            Row(children: [
-
-
-            ],)
-          ],
-        ),
-
+            );
+          }
+        },
       )
+
     );
   }
 
+  Future<List<Map<String, dynamic>>> fetchData() async {
+    // Replace 'yourReference' with the path to your data in the Realtime Database
+    DatabaseEvent event = await FirebaseDatabase.instance
+        .ref()
+        .child('Request')
+        .orderByChild('Service Type')
+        .equalTo('wash')
+        .once();
 
+    List<Map<String, dynamic>> data = [];
+    Map<dynamic, dynamic>? values = event.snapshot.value as Map?;
 
+    if (values != null) {
+      values.forEach((key, item) {
+        // You can customize this part based on your data structure
+        data.add(Map<String, dynamic>.from(item));
+      });
+    }
 
-   void Getrequest(){
-     _databaseReference = FirebaseDatabase.instance.ref().child('Request');
-     // Add listener to the database reference
-     _databaseReference?.onValue.listen((DatabaseEvent event) {
-       // Handle the data from the database
-       Map<dynamic, dynamic>? requests = event.snapshot.value as Map?;
-       if (requests != null) {
-         // Filter requests where service type is equal to 'wash'
-         List washRequests = requests.keys
-             .where((key) => requests[key]['Service Type'] == 'Wash')
-             .toList();
-         print('Wash Requests: $washRequests');
-       }
-     });
-
+    return data;
   }
 }
+
+
+
+
+
