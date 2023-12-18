@@ -53,6 +53,8 @@ class _washrequestState extends State<washrequest> {
           Request request = Request(
             title: value['UserName'],
             description: value['created_at'],
+            amount: value['Amount'].toString(),
+            count: value['selectedItemCount'],
           );
           requests.add(request);
         });
@@ -74,7 +76,7 @@ class _washrequestState extends State<washrequest> {
       body: Column(
         children: [
           SizedBox(height: 45,),
-          Column( children: [Text("Borla Requests",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),)]),
+          Column( children: [Text("Wash Requests",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),)]),
           SizedBox(
             height: screenWidth / 0.67,
 
@@ -84,12 +86,25 @@ class _washrequestState extends State<washrequest> {
                 final request = _userRequests[index];
                 return Card(
                   elevation: 4, // Controls the shadow of the card.
+                  color: Colors.white,
                   margin: EdgeInsets.all(16), // Margin around the card.
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12), // Rounded corners.
                   ),
+
                   child: ListTile(
-                    title: Text(request.title),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image(
+                          image: AssetImage(
+                            "assets/images/wash.png",),
+                          height: 60,
+                        ),
+                        Text(request.title),
+                        Text(request.count),
+                      ],
+                    ),
                     subtitle: Text(request.description),
                   ),
                 );

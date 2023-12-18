@@ -172,17 +172,17 @@ class LaundryService_State extends State<LaundryService> {
           width: 354,
           child: Column(
             children: [
-              Container(
-                child: Column(
-                  children: [
-                    Text(
-                      "Dashboard",
-                      style: TextStyle(fontSize: 23),
-                    ),
-                    Row(children: [])
-                  ],
-                ),
-              )
+              // Container(
+              //   child: Column(
+              //     children: [
+              //       Text(
+              //         "Dashboard",
+              //         style: TextStyle(fontSize: 23),
+              //       ),
+              //       Row(children: [])
+              //     ],
+              //   ),
+              // )
             ],
           ),
         )
