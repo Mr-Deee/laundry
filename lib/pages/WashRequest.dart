@@ -52,6 +52,7 @@ class _washrequestState extends State<washrequest> {
           // Adjust this part based on your actual Request class structure
           Request request = Request(
             title: value['UserName'],
+            title: value['UserName'],
             description: value['created_at'],
             amount: value['Amount'].toString(),
             count: value['selectedItemCount'],
@@ -106,6 +107,28 @@ class _washrequestState extends State<washrequest> {
                       ],
                     ),
                     subtitle: Text(request.description),
+                trailing: GestureDetector(
+                onTap: () {
+                // Update the status when the button is tapped.
+                setState(() {
+                if (request.status == "started") {
+                request.status = "finish";
+                } else {
+                request.status = "started";
+                }
+                });
+                },
+                child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                request.status == "started" ? "Finish" : "Start",
+                style: TextStyle(color: Colors.white),
+                ),
+                ),
                   ),
                 );
               },
