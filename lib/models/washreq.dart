@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Request {
   final String title;
   final String amount;
-  final String status;
+  late final String status;
   final String count;
   final String description;
 
@@ -19,7 +19,7 @@ class Request {
     final data = doc.data() as Map<String, dynamic>;
     return Request(
       title: data['UserName'] ?? '',
-      status: data['Statuds] ?? '',
+      status: data['Status'] ?? '',
       count: data['selectedItemCount']??'',
       amount:data['Amount']??'',
       description: data['UserName'] ?? '',
