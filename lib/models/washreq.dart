@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Request {
   final String title;
   final String amount;
-  late final String status;
+    String status;
   final String count;
   final String description;
 

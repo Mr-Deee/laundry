@@ -88,7 +88,7 @@ class _washrequestState extends State<washrequest> {
             child: ListView.builder(
               itemCount: _userRequests.length,
               itemBuilder: (context, index) {
-                final request = _userRequests[index];
+                 var request = _userRequests[index];
                 return Card(
                     elevation: 4,
                     // Controls the shadow of the card.
@@ -114,33 +114,20 @@ class _washrequestState extends State<washrequest> {
                         ],
                       ),
                       subtitle: Text(request.description),
-                      trailing: GestureDetector(
+                      trailing:
+                      GestureDetector(
                         onTap: () {
                           setState(() {
                             if (request.status == "Pending") {
-                              request.status = "finish";
-                            } else {
+
                               request.status = "started";
+
+                            } else {
+                              request.status = "finish";
                             }
                           });
-                          DatabaseReference databaseReference =
-                              FirebaseDatabase.instance.ref();
-                          databaseReference
-                              .child('Request')
-                              .child(request.title)
-                              .update({}).then((_) {
-                            print(
-                                'Status updated successfully in Realtime Database');
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Status updated successfully'),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
-                          }).catchError((error) {
-                            print(
-                                'Error updating status in Realtime Database: $error');
-                          });
+
+                          _updateRequestStatus(index, request.status);
                         },
                         child: Container(
                           padding: EdgeInsets.all(8),
@@ -161,5 +148,15 @@ class _washrequestState extends State<washrequest> {
         ],
       ),
     );
+  }
+
+// Function to update the request status in your data source
+  void _updateRequestStatus(int index, String newStatus) {
+    // Assuming _userRequests is a List of Request objects
+    setState(() {
+      _userRequests[index].status = newStatus;
+    });
+
+    // Add your database update logic here if needed
   }
 }
