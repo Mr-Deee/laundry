@@ -78,7 +78,7 @@ class _ironrequestState extends State<ironrequest> {
           ),
           Column(children: [
             Text(
-              "Wash Requests",
+              "Ironing Requests",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             )
           ]),
@@ -104,7 +104,7 @@ class _ironrequestState extends State<ironrequest> {
                         children: [
                           Image(
                             image: AssetImage(
-                              "assets/images/wash.png",
+                              "assets/images/ironing.png",
                             ),
                             height: 60,
                           ),

@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'IronRequest.dart';
+import '';
 
 import 'WashRequest.dart';
 
@@ -106,7 +108,10 @@ class LaundryService_State extends State<LaundryService> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ironrequest()));
+                  },
                   child: Padding(
                     padding: EdgeInsets.only(top: 28.0),
                     child: Column(
@@ -123,7 +128,10 @@ class LaundryService_State extends State<LaundryService> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => drycleaning()));
+                  },
                   child: Padding(
                     padding: EdgeInsets.only(top: 28.0),
                     child: Column(
