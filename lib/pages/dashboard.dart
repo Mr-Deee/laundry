@@ -34,41 +34,33 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     final name = Provider.of<Client>(context).riderInfo?.firstname ?? "Loading";
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Constants.scaffoldBackgroundColor,
-        buttonBackgroundColor: Constants.primaryColor,
-        items: [
-          Icon(
-            Icons.home,
-            size: 30.0,
-            color: activeIndex == 0 ? Colors.white : Color(0xFFC8C9CB),
-          ),
-          Icon(
-            Icons.schedule,
-            size: 30.0,
-            color: activeIndex == 1 ? Colors.white : Color(0xFFC8C9CB),
-          ),
-          // Icon(
-          //   Icons.assistant_direction,
-          //   size: 30.0,
-          //   color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
-          // ),
-          // Icon(
-          //     Icons.heart_broken,            size: 30.0,
-          //   color: activeIndex == 3 ? Colors.white : Color(0xFFC8C9CB),
-          // ),
-          Icon(
-            Icons.settings,
-            size: 30.0,
-            color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            activeIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: CurvedNavigationBar(
+      //   backgroundColor: Constants.scaffoldBackgroundColor,
+      //   buttonBackgroundColor: Constants.primaryColor,
+      //   items: [
+      //     Icon(
+      //       Icons.home,
+      //       size: 30.0,
+      //       color: activeIndex == 0 ? Colors.white : Color(0xFFC8C9CB),
+      //     ),
+      //     Icon(
+      //       Icons.schedule,
+      //       size: 30.0,
+      //       color: activeIndex == 1 ? Colors.white : Color(0xFFC8C9CB),
+      //     ),
+      //
+      //     Icon(
+      //       Icons.settings,
+      //       size: 30.0,
+      //       color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
+      //     ),
+      //   ],
+      //   onTap: (index) {
+      //     setState(() {
+      //       activeIndex = index;
+      //     });
+      //   },
+      // ),
       backgroundColor: Constants.primaryColor,
       body: Stack(
         clipBehavior: Clip.none,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laundry/models/Client.dart';
+import 'package:laundry/pages/Mainscreen.dart';
 import 'package:laundry/pages/dashboard.dart';
 
 import 'package:laundry/pages/landingpage.dart';
@@ -47,9 +48,10 @@ class MyApp extends StatelessWidget {
 
         initialRoute: FirebaseAuth.instance.currentUser == null
             ? '/landing'
-            : '/dashboard',
+            : '/main',
         routes: {
-          // "/splash":(context) => SplashScreen(),
+
+        "/main":(context) => Mainscreen(),
           "/dashboard": (context) => Dashboard(),
           "/LaundryService": (context) => LaundryService(),
           "/SignUP": (context) => signup(),
