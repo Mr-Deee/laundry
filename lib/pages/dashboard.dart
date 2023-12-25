@@ -19,6 +19,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final PageController _pageController = PageController();
+
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +37,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     final name = Provider.of<Client>(context).riderInfo?.firstname ?? "Loading";
     return Scaffold(
+
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Constants.scaffoldBackgroundColor,
         buttonBackgroundColor: Constants.primaryColor,
@@ -66,6 +70,10 @@ Icons.heart_broken,            size: 30.0,
         onTap: (index) {
           setState(() {
             activeIndex = index;
+            _pageController.animateToPage(
+                index,
+                duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut,);
           });
         },
       ),
@@ -321,7 +329,13 @@ Icons.heart_broken,            size: 30.0,
                             ),
                           ],
                         ),
+                        PageView(
+                          controller: _pageController,
+                          physics: NeverScrollableScrollPhysics(), // Disable swiping between pages
+                          children: [
 
+                          ],
+                        ),
                         // Container(
                         //   height: ScreenUtil().setHeight(100.0),
                         //   child: Center(

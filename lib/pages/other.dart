@@ -25,8 +25,8 @@ class Other extends StatefulWidget {
 }
 
 class _OtherdescriptionState extends State<Other> {
-  // TextEditingController requestTitlecontroller = TextEditingController();
-  // TextEditingController Descriptioncontroller = TextEditingController();
+  TextEditingController requestTitlecontroller = TextEditingController();
+  TextEditingController Descriptioncontroller = TextEditingController();
   Map<String, int> itemCountMap = {};
 
   // List<NearbyArtisans>? availableArtisans;
@@ -152,57 +152,70 @@ class _OtherdescriptionState extends State<Other> {
                           const SizedBox(
                             height: 10,
                           ),
-                          // Text('Location',
-                          //     style: GoogleFonts.openSans(
-                          //       color: Colors.black,
-                          //       fontSize: 18,
-                          //     )),
-
-                          //location
-
-                          // Card(
-                          //     elevation: 8,
-                          //     shadowColor: Colors.white70,
-                          //     shape: const RoundedRectangleBorder(
-                          //         borderRadius: BorderRadius.all(
-                          //           Radius.circular(20),
-                          //         ),
-                          //         side: BorderSide(
-                          //             width: 2, color: Colors.white24)),
-                          //     child: Padding(
-                          //       padding: const EdgeInsets.all(10.0),
-                          //       child: Center(
-                          //           child: Column(
-                          //               mainAxisAlignment:
-                          //                   MainAxisAlignment.center,
-                          //               children: [
-                          //             Row(
-                          //               children: <Widget>[
-                          //                 Icon(Icons.location_on),
-                          //                 SizedBox(
-                          //                   width: 8,
-                          //                 ),
-                          //                 Expanded(
-                          //                   child: Column(
-                          //                     crossAxisAlignment:
-                          //                         CrossAxisAlignment.start,
-                          //                     children: <Widget>[
-                          //                       Text(
-                          //                         '${_currentAddress ?? ""}',
-                          //                         style: Theme.of(context)
-                          //                             .textTheme
-                          //                             .caption,
-                          //                       ),
-                          //                     ],
-                          //                   ),
-                          //                 ),
-                          //                 SizedBox(
-                          //                   width: 8,
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ])),
-                          //     )),
+                          Card(
+                              elevation: 8,
+                              shadowColor: Colors.white70,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                  side: BorderSide(
+                                      width: 2, color: Colors.white24)),
+                              child: Container(
+                                padding:
+                                const EdgeInsets.symmetric(horizontal: 12),
+                                child: TextField(
+                                  controller: requestTitlecontroller,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "",
+                                    hintStyle: GoogleFonts.openSans(
+                                      color: Colors.grey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              )),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            'Enter Fault Description',
+                            style: GoogleFonts.openSans(
+                                color: Colors.black, fontSize: 18),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Card(
+                            elevation: 8,
+                            shadowColor: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                                side: BorderSide(
+                                    width: 2, color: Colors.white)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextField(
+                                controller: Descriptioncontroller,
+                                maxLines: 6,
+                                cursorColor: Colors.black,
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                decoration: InputDecoration(
+                                  hintText: 'Be brief and precise',
+                                  hintStyle: GoogleFonts.openSans(
+                                    color: Colors.grey,
+                                    fontSize: 16,
+                                  ),
+                                  border: InputBorder.none,
+                                  fillColor: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
 
                           const SizedBox(
                             height: 10,
