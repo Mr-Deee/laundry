@@ -11,6 +11,7 @@ import '../utils/constants.dart';
 import '../widgets/latest_orders.dart';
 // import '../widgets/laundryRequest.dart';
 import '../widgets/order_description.dart';
+import 'other.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -306,7 +307,7 @@ Icons.heart_broken,            size: 30.0,
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                          const Problem_description(
+                                          const Other(
                                             image:
                                                 'assets/images/running-shoes.png',
                                             title: 'Others',
