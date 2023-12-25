@@ -19,9 +19,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final PageController _pageController = PageController();
-
-
   @override
   void initState() {
     super.initState();
@@ -37,43 +34,38 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     final name = Provider.of<Client>(context).riderInfo?.firstname ?? "Loading";
     return Scaffold(
-
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Constants.scaffoldBackgroundColor,
         buttonBackgroundColor: Constants.primaryColor,
         items: [
           Icon(
-            Icons.ios_share_rounded,
+            Icons.home,
             size: 30.0,
             color: activeIndex == 0 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            Icons.map,
+            Icons.schedule,
             size: 30.0,
             color: activeIndex == 1 ? Colors.white : Color(0xFFC8C9CB),
           ),
-          Icon(
-            Icons.assistant_direction,
-            size: 30.0,
-            color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
-          ),
-          Icon(
-Icons.heart_broken,            size: 30.0,
-            color: activeIndex == 3 ? Colors.white : Color(0xFFC8C9CB),
-          ),
+          // Icon(
+          //   Icons.assistant_direction,
+          //   size: 30.0,
+          //   color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
+          // ),
+          // Icon(
+          //     Icons.heart_broken,            size: 30.0,
+          //   color: activeIndex == 3 ? Colors.white : Color(0xFFC8C9CB),
+          // ),
           Icon(
             Icons.settings,
             size: 30.0,
-            color: activeIndex == 4 ? Colors.white : Color(0xFFC8C9CB),
+            color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
           ),
         ],
         onTap: (index) {
           setState(() {
             activeIndex = index;
-            _pageController.animateToPage(
-                index,
-                duration: Duration(milliseconds: 300),
-            curve: Curves.easeInOut,);
           });
         },
       ),
@@ -329,13 +321,7 @@ Icons.heart_broken,            size: 30.0,
                             ),
                           ],
                         ),
-                        PageView(
-                          controller: _pageController,
-                          physics: NeverScrollableScrollPhysics(), // Disable swiping between pages
-                          children: [
 
-                          ],
-                        ),
                         // Container(
                         //   height: ScreenUtil().setHeight(100.0),
                         //   child: Center(
