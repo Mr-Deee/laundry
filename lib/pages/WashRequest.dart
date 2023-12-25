@@ -156,7 +156,35 @@ class _washrequestState extends State<washrequest> {
     setState(() {
       _userRequests[index].status = newStatus;
     });
-
+    // Update the request status in the Realtime Database
+    _databaseReference?.orderByChild("Status").equalTo(index).once().then((DatabaseEvent event) {
+      if (event.snapshot.value != null) {
+        Map<String, dynamic>? requestData = event.snapshot.value as Map<String, dynamic>?;
+        requestData?.forEach((key, value) {
+          // Assuming 'key' is the key of the request to update
+          _databaseReference
+              ?.child(key)
+              .update({'status': newStatus})
+              .then((_) {
+            print('Status updated successfully in Realtime Database');
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Status updated successfully'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          })
+              .catchError((error) {
+            print('Error updating status in Realtime Database: $error');
+          });
+        });
+      } else {
+        print('Request not found');
+      }
+    })
+        .catchError((error) {
+      print('Error querying database: $error');
+    });
     // Add your database update logic here if needed
   }
 }
