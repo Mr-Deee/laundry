@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:laundry/pages/dashboard.dart';
 
 import '../utils/constants.dart';
+import 'Status.dart';
 
 class Mainscreen extends StatefulWidget {
   const Mainscreen({super.key});
@@ -32,7 +33,7 @@ class _MainscreenState extends State<Mainscreen> {
           // Page 1
           Dashboard(),
           // Page 2
-          Container(color: Colors.green, child: Center(child: Text('Schedule'))),
+          Status(),
           // Page 3
           Container(color: Colors.orange, child: Center(child: Text('Settings'))),
         ],

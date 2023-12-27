@@ -79,6 +79,7 @@ class _item_selectionState extends State<item_selection> {
 
                           IconButton(
                             onPressed: () {
+                              print(count);
                               onItemSelected?.call(title!, image!, count);
                               incrementCounter();
                               // Add your button click logic here
@@ -130,7 +131,11 @@ class _item_selectionState extends State<item_selection> {
 
   void incrementCounter() {
     setState(() {
-      count++;
+
+        count++;
+
+
+
     });
   }
 

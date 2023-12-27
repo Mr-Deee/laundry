@@ -160,7 +160,10 @@ late int amount;
                                           itemCountMap[selectedItemTitle
                                                   .toString()] =
                                               int.parse(
-                                                  selectedItemCount.toString());
+                                                  selectedItemCount.toString()
+
+
+                                              );
                                         }),
                                       }),
                               item_selection(
@@ -423,10 +426,13 @@ late int amount;
           // .child(_firebaseAuth.currentUser!.uid)
           .push();
       final USERNAME= Provider.of<Client>(context,listen: false).riderInfo?.firstname??"";
+      final email= Provider.of<Client>(context,listen: false).riderInfo?.email??"";
       final phone= Provider.of<Client>(context,listen: false).riderInfo?.phone??"";
 
       Map rideInfoMap = {
         "UserName":  USERNAME,
+        "email":  email,
+        "Status":"Pending",
         "Phone":  phone,
         "created_at": DateTime.now().toString(),
         "Amount": totalSum,

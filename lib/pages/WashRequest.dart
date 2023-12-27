@@ -18,7 +18,7 @@ class _washrequestState extends State<washrequest> {
   var username;
 
   void initState() {
-    // username=  Provider.of<Client>(context, listen: false).?.firstname;
+
 
     super.initState();
     // getPicture();
