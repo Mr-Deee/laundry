@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laundry/models/Client.dart';
 import 'package:laundry/pages/Mainscreen.dart';
-import 'package:laundry/pages/dashboard.dart';
+import 'package:laundry/pages/cleintdashboard.dart';
 
 import 'package:laundry/pages/landingpage.dart';
 import 'package:laundry/pages/laundryserviceDashboard.dart';

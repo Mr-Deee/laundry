@@ -14,7 +14,7 @@ class Status extends StatefulWidget {
 }
 
 class _StatusState extends State<Status> {
-
+bool _isLoading= true;
   void initState() {
 
     super.initState();
@@ -27,87 +27,75 @@ class _StatusState extends State<Status> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return  Scaffold(
-      body : Container(
+      body :Container(
         child: SingleChildScrollView(
-          child: Column(children: [
-            Column(
-              children: [
-                SizedBox(height: 50,),
-                 Center(child: Text("Laundry Status",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),))
-              ],
-            ),
-          
-              SizedBox(
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  SizedBox(height: 50,),
+                  Center(child: Text("Laundry Status",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)),
+                ],
+              ),
+
+              // Check if data is still loading
+              _isLoading
+                  ? CircularProgressIndicator()  // Show circular loading indicator
+                  : SizedBox(
                 height: screenWidth / 0.67,
                 child: ListView.builder(
-          itemCount: _userRequests.length,
-          itemBuilder: (context, index) {
-            var request = _userRequests[index];
-            return Card(
-                elevation: 4,
-                // Controls the shadow of the card.
-                color: Colors.white,
-                margin: EdgeInsets.all(16),
-                // Margin around the card.
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(12), // Rounded corners.
-                ),
-                child: ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image(
-                        image: AssetImage(
-                          "assets/images/wash.png",
-                        ),
-                        height: 60,
+                  itemCount: _userRequests.length,
+                  itemBuilder: (context, index) {
+                    var request = _userRequests[index];
+                    return Card(
+                      elevation: 4,
+                      color: Colors.white,
+                      margin: EdgeInsets.all(16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      Text(request.title),
-                      Text(request.count),
-                    ],
-                  ),
-                  subtitle: Text(request.description),
-                  trailing:Text(request.status),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     // setState(() {
-                  //     //   if (request.status == "Pending") {
-                  //     //
-                  //     //     request.status = "started";
-                  //     //
-                  //     //   } else {
-                  //     //     request.status = "finish";
-                  //     //   }
-                  //     // });
-                  //     //
-                  //     // _updateRequestStatus(index, request.status);
-                  //   },
-                  //   child: Container(
-                  //     padding: EdgeInsets.all(8),
-                  //     decoration: BoxDecoration(
-                  //       color: Colors.blue,
-                  //       borderRadius: BorderRadius.circular(8),
-                  //     ),
-                  //     child: Text(
-                  //       request.status == "started" ? "Finish" : "Start",
-                  //       style: TextStyle(color: Colors.white),
-                  //     ),
-                  //   ),
-                  // ),
-                ));
-          },
+                      child: ListTile(
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image(
+                              image: AssetImage(_getImageAsset(request.description)),                              height: 60,
+                            ),
+                            Text(request.title),
+                            Text(request.count),
+                        Text(request.description),
+                          ],
+                        ),
+
+                        trailing: Text(request.status),
+                      ),
+                    );
+                  },
                 ),
               ),
-          
-          
-          
-          
-          ],),
+            ],
+          ),
         ),
       )
+
     );
   }
+String _getImageAsset(String description) {
+  switch (description.toLowerCase()) {
+    case 'iron':
+      return "assets/images/ironing.png";
+      case 'wash':
+      return "assets/images/wash.png";
+    case 'dry clean':
+      return "assets/images/dry-cleaning.png";
+      case 'others':
+      return "assets/images/drunning-shoes.png";
+
+  // Add more cases for other descriptions as needed
+    default:
+      return "assets/images/washlogo.png"; // Default image if no match
+  }
+}
 
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -136,7 +124,7 @@ class _StatusState extends State<Status> {
           Request request = Request(
             title: value['UserName'],
             status: value['Status'],
-            description: value['created_at'],
+            description: value['Service Type'],
             amount: value['Amount'].toString(),
             count: value['selectedItemCount'],
           );
@@ -146,6 +134,7 @@ class _StatusState extends State<Status> {
 
       setState(() {
         _userRequests = requests;
+        _isLoading = false;
       });
     }
   }

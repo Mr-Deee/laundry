@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:laundry/pages/dashboard.dart';
+import 'package:laundry/pages/cleintdashboard.dart';
 
 import '../utils/constants.dart';
 import 'Status.dart';
