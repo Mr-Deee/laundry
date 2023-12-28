@@ -30,49 +30,50 @@ bool _isLoading= true;
       body :Container(
         child: SingleChildScrollView(
           child: Column(
+
             children: [
-              Column(
-                children: [
-                  SizedBox(height: 50,),
-                  Center(child: Text("Laundry Status",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)),
-                ],
-              ),
+              SizedBox(height: 50,),
+              Center(child: Text("Laundry Status",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)),
+              Container(
+                child:    _isLoading
+                    ? CircularProgressIndicator()  // Show circular loading indicator
+                    : SizedBox(
+                  height: screenWidth/0.77,
+                  child: ListView.builder(
+                    itemCount: _userRequests.length,
+                    itemBuilder: (context, index) {
+                      var request = _userRequests[index];
+                      return Card(
+                        elevation: 4,
+                        color: Colors.white,
+                        margin: EdgeInsets.all(16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image(
+                                image: AssetImage(_getImageAsset(request.description)),                              height: 60,
+                              ),
+                              Text(request.title),
+                              Text(request.count),
+                              Text(request.description),
+                            ],
+                          ),
+
+                          trailing: Text(request.status),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
+
 
               // Check if data is still loading
-              _isLoading
-                  ? CircularProgressIndicator()  // Show circular loading indicator
-                  : SizedBox(
-                height: screenWidth / 0.67,
-                child: ListView.builder(
-                  itemCount: _userRequests.length,
-                  itemBuilder: (context, index) {
-                    var request = _userRequests[index];
-                    return Card(
-                      elevation: 4,
-                      color: Colors.white,
-                      margin: EdgeInsets.all(16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image(
-                              image: AssetImage(_getImageAsset(request.description)),                              height: 60,
-                            ),
-                            Text(request.title),
-                            Text(request.count),
-                        Text(request.description),
-                          ],
-                        ),
 
-                        trailing: Text(request.status),
-                      ),
-                    );
-                  },
-                ),
-              ),
             ],
           ),
         ),
