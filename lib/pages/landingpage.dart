@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/pages/login.dart';
+import 'package:laundry/pages/signup.dart';
 
 
 import '../utils/constants.dart';
 import '../utils/helper.dart';
 import '../widgets/app_button.dart';
 
-class Home extends StatelessWidget {
+class Landingpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +48,7 @@ class Home extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 20.0,
@@ -64,7 +66,7 @@ class Home extends StatelessWidget {
                   children: [
                     SizedBox(height: 20.0),
                     Text(
-                      "Welcome to Laundree!",
+                      "Welcome to The Laundry",
                       style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Color.fromRGBO(19, 22, 33, 1),
@@ -81,23 +83,63 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 40.0,
+                      height: 10.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 11.0),
+                      child: SizedBox(
+                        width: 300,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black),
+                          onPressed: () {
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Login(),
+                              ),
+                            );
+
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
                     // Let's create a generic button widget
-                    AppButton(
-                      text: "Log In",
-                      type: ButtonType.PLAIN,
-                      onPressed: () {
-                        nextScreen(context, "/login");
-                      },
+                    Padding(
+                      padding: const EdgeInsets.only(top: 11.0),
+                      child: SizedBox(
+                        width: 300,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFFF169F00)),
+                          onPressed: () {
+                            // sendVerificationCode();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => signup(),
+                              ),
+                            );
+
+                          },
+                          child: Text(
+                            "Create Account",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 15.0,
                     ),
-                    AppButton(
-                      text: "Create an Account",
-                      type: ButtonType.PRIMARY,
-                    )
+
                   ],
                 ),
               ),

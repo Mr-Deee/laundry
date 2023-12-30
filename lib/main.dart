@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:laundry/models/Client.dart';
 import 'package:laundry/pages/dashboard.dart';
-import 'package:laundry/pages/home.dart';
+
+import 'package:laundry/pages/landingpage.dart';
 import 'package:laundry/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:laundry/pages/signup.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -47,14 +49,14 @@ class MyApp extends StatelessWidget {
 
 
         initialRoute: FirebaseAuth.instance.currentUser == null
-            ? '/login'
-            : '/Homepage',
+            ? '/landing'
+            : '/dashboard',
         routes: {
           // "/splash":(context) => SplashScreen(),
           "/dashboard": (context) => Dashboard(),
-          // "/SignUP": (context) => SignupPage(),
+          "/SignUP": (context) => signup(),
           "/login": (context) => Login(),
-          "/Homepage": (context) => Home(),
+          "/landing": (context) => Landingpage(),
 
 
         }
