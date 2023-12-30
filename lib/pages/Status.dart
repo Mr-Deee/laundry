@@ -127,7 +127,7 @@ String _getImageAsset(String description) {
             status: value['Status'],
             description: value['Service Type'],
             amount: value['Amount'].toString(),
-            count: value['selectedItemCount'],
+            count: value['selectedItemCount'].toString(),
           );
           requests.add(request);
         });

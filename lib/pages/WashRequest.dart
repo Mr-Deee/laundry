@@ -16,7 +16,7 @@ class washrequest extends StatefulWidget {
 class _washrequestState extends State<washrequest> {
   DatabaseReference? _databaseReference;
   var username;
-
+  bool _isLoading= true;
   void initState() {
 
 
@@ -62,6 +62,8 @@ class _washrequestState extends State<washrequest> {
 
       setState(() {
         _userRequests = requests;
+        _isLoading= false;
+
       });
     }
   }
@@ -83,7 +85,9 @@ class _washrequestState extends State<washrequest> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             )
           ]),
-          SizedBox(
+          _isLoading
+              ? CircularProgressIndicator()
+         : SizedBox(
             height: screenWidth / 0.67,
             child: ListView.builder(
               itemCount: _userRequests.length,

@@ -47,15 +47,6 @@ class _Problem_descriptionState extends State<Problem_description> {
     });
   }
 
-  final items = [
-    'Problem1',
-    'Problem2',
-    'Problem3',
-    'Problem4',
-    'Problem5',
-    'Problem6',
-    'Problem7'
-  ];
   String? value;
 
   String Address = 'search';
@@ -337,6 +328,7 @@ late int amount;
                                   ),
                                   onPressed: () {
                                     calculateTotal();
+                                    calculateTotalCount();
                                     makingRequest();
                                   },
                                   child: Text(
@@ -362,6 +354,7 @@ late int amount;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   int totalSum = 0;
+  int totalCountSum = 0;
   void calculateTotal() {
 
     itemCountMap.forEach((key, value) {
@@ -378,6 +371,23 @@ late int amount;
       }
     });
     print("Total Sum: $totalSum");
+  }
+  void calculateTotalCount() {
+
+    itemCountMap.forEach((key, value) {
+      if (key == 'Shirt') {
+        totalCountSum +=   value;
+      } else if (key == 'T-Shirt') {
+        totalCountSum +=  value;
+      } else if (key == 'suit') {
+        totalCountSum +=  value;
+      } else if (key == 'Trouser') {
+        totalCountSum +=  value;
+      } else if (key == 'Skirt') {
+        totalCountSum +=  value;
+      }
+    });
+    print("Total Sum: $totalCountSum");
   }
 
   Future<void> makingRequest() async {
@@ -436,7 +446,7 @@ late int amount;
         "Phone":  phone,
         "created_at": DateTime.now().toString(),
         "Amount": totalSum,
-        'selectedItemCount': selectedItemCount,
+        'selectedItemCount': totalCountSum,
         'Location': _currentAddress?.trim().toString(),
         'Service Type': widget.title.toString(),
         'finalClient_address': _currentAddress?.trim().toString(),
