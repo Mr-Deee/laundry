@@ -15,7 +15,7 @@ class ironrequest extends StatefulWidget {
 class _ironrequestState extends State<ironrequest> {
   DatabaseReference? _databaseReference;
   var username;
-
+  bool _isLoading= false;
   void initState() {
     // username=  Provider.of<Client>(context, listen: false).?.firstname;
 
@@ -61,6 +61,7 @@ class _ironrequestState extends State<ironrequest> {
 
       setState(() {
         _userRequests = requests;
+        _isLoading= false;
       });
     }
   }
@@ -82,7 +83,9 @@ class _ironrequestState extends State<ironrequest> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             )
           ]),
-          SizedBox(
+          _isLoading
+    ?CircularProgressIndicator()
+         : SizedBox(
             height: screenWidth / 0.67,
             child: ListView.builder(
               itemCount: _userRequests.length,

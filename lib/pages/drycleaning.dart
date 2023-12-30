@@ -16,6 +16,7 @@ class drycleaning extends StatefulWidget {
 class _drycleaningrequestState extends State<drycleaning> {
   DatabaseReference? _databaseReference;
   var username;
+  bool _isLoading= true;
 
   void initState() {
     // username=  Provider.of<Client>(context, listen: false).?.firstname;
@@ -38,7 +39,7 @@ class _drycleaningrequestState extends State<drycleaning> {
 
       final DatabaseEvent event = await databaseReference
           .orderByChild('Service Type')
-          .equalTo("drycleaning")
+          .equalTo("Dry Clean")
           .once();
 
       print("ggg" + '${username}');
@@ -54,7 +55,7 @@ class _drycleaningrequestState extends State<drycleaning> {
             status: value['Status'],
             description: value['created_at'],
             amount: value['Amount'].toString(),
-            count: value['selectedItemCount'],
+            count: value['selectedItemCount'].toString(),
           );
           requests.add(request);
         });
@@ -62,6 +63,7 @@ class _drycleaningrequestState extends State<drycleaning> {
 
       setState(() {
         _userRequests = requests;
+        _isLoading= false;
       });
     }
   }
@@ -83,6 +85,10 @@ class _drycleaningrequestState extends State<drycleaning> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             )
           ]),
+
+          _isLoading
+              ? CircularProgressIndicator()
+              :
           SizedBox(
             height: screenWidth / 0.67,
             child: ListView.builder(
