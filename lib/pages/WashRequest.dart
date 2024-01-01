@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:laundry/main.dart';
 import 'package:provider/provider.dart';
 
 import '../models/washreq.dart';
@@ -124,14 +125,15 @@ class _washrequestState extends State<washrequest> {
                           setState(() {
                             if (request.status == "Pending") {
 
-                              request.status = "started";
+                              request.status = "Started";
 
                             } else {
-                              request.status = "finish";
+                              request.status = "Finish";
                             }
                           });
-
                           _updateRequestStatus(index, request.status);
+
+
                         },
                         child: Container(
                           padding: EdgeInsets.all(8),
@@ -160,27 +162,30 @@ class _washrequestState extends State<washrequest> {
     setState(() {
       _userRequests[index].status = newStatus;
     });
+
     // Update the request status in the Realtime Database
-    _databaseReference?.orderByChild("Status").equalTo(index).once().then((DatabaseEvent event) {
+    request1.once().then((DatabaseEvent event) {
       if (event.snapshot.value != null) {
-        Map<String, dynamic>? requestData = event.snapshot.value as Map<String, dynamic>?;
+        Map<dynamic, dynamic>? requestData = event.snapshot.value as Map<dynamic, dynamic>?;
         requestData?.forEach((key, value) {
           // Assuming 'key' is the key of the request to update
-          _databaseReference
-              ?.child(key)
-              .update({'status': newStatus})
-              .then((_) {
-            print('Status updated successfully in Realtime Database');
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Status updated successfully'),
-                duration: Duration(seconds: 2),
-              ),
-            );
-          })
-              .catchError((error) {
-            print('Error updating status in Realtime Database: $error');
-          });
+          if (value['Status'] == index) {
+            print('Index: $index');
+            request1.child(key)
+                .update({'Status': newStatus})
+                .then((_) {
+              print('Status updated successfully in Realtime Database');
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Status updated successfully'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            })
+                .catchError((error) {
+              print('Error updating status in Realtime Database: $error');
+            });
+          }
         });
       } else {
         print('Request not found');
@@ -191,4 +196,7 @@ class _washrequestState extends State<washrequest> {
     });
     // Add your database update logic here if needed
   }
+
+
+
 }
