@@ -122,18 +122,17 @@ class _washrequestState extends State<washrequest> {
                       trailing:
                       GestureDetector(
                         onTap: () {
-                          setState(() {
-                            if (request.status == "Pending") {
-
-                              request.status = "Started";
-
-                            } else {
-                              request.status = "Finish";
-                            }
+                         setState(() {
+                           if (request.status == "Pending") {
+                             request.status = "Started";
+                           }
+                           else if (request.status == "Started") {
+                             request.status = "Finish";
+                           }
                           });
+
+
                           _updateRequestStatus(index, request.status);
-
-
                         },
                         child: Container(
                           padding: EdgeInsets.all(8),
@@ -142,7 +141,7 @@ class _washrequestState extends State<washrequest> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            request.status == "started" ? "Finish" : "Start",
+                              request.status == "Started" ? "Finish" : "Start",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -158,45 +157,31 @@ class _washrequestState extends State<washrequest> {
 
 // Function to update the request status in your data source
   void _updateRequestStatus(int index, String newStatus) {
-    // Assuming _userRequests is a List of Request objects
-    setState(() {
-      _userRequests[index].status = newStatus;
-    });
-
-    // Update the request status in the Realtime Database
     request1.once().then((DatabaseEvent event) {
       if (event.snapshot.value != null) {
-        Map<dynamic, dynamic>? requestData = event.snapshot.value as Map<dynamic, dynamic>?;
+        Map<dynamic, dynamic>? requestData = event.snapshot.value as Map<
+            dynamic,
+            dynamic>?;
+
         requestData?.forEach((key, value) {
           // Assuming 'key' is the key of the request to update
-          if (value['Status'] == index) {
-            print('Index: $index');
-            request1.child(key)
-                .update({'Status': newStatus})
-                .then((_) {
-              print('Status updated successfully in Realtime Database');
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Status updated successfully'),
-                  duration: Duration(seconds: 2),
-                ),
-              );
-            })
-                .catchError((error) {
-              print('Error updating status in Realtime Database: $error');
-            });
-          }
+          request1.child(key).update({'Status': newStatus}).then((_) {
+            print('Status updated successfully in Realtime Database');
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Status updated successfully'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }).catchError((error) {
+            print('Error updating status in Realtime Database: $error');
+          });
         });
       } else {
         print('Request not found');
       }
-    })
-        .catchError((error) {
+    }).catchError((error) {
       print('Error querying database: $error');
     });
-    // Add your database update logic here if needed
   }
-
-
-
 }
